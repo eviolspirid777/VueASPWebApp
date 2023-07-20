@@ -1,0 +1,317 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<template id="stud">
+<div>
+<link rel="stylesheet" type="text/css"/>
+
+
+<modal-form v-if="showModal" @close="showModal = false" />
+
+<button id="show-modal" @click="showModal = !showModal" type="button" class="btn-own-cls" >
+  Добавить студента
+</button>
+<modal v-if="showModal" @close="showModal = false">
+</modal>
+
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        <div class="d-flex flex-row">
+          <input class="form-control m-2" v-model="IDFilter" v-on:keyup="FilterFn()" placeholder="Filter" style="width:100px">
+          <button type="button" class="btn btn-light" @click="sortResult('ID',true)">
+            <svg-file/>
+          </button>
+          <button type="button" class="btn btn-light" @click="sortResult('ID',false)">
+            <svg-file/>
+          </button>
+        </div>
+        Id
+      </th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Отчество</th>
+      <th>Факультет</th>
+      <th>Специальность</th>
+      <th>Kypc</th>
+      <th>Группа</th>
+      <th>Город</th>
+      <th>Индекс</th>
+      <th>Улица</th>
+      <th>Телефон</th>
+      <th>Почта</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="dep in student" :key="dep.ID">
+      <td>{{dep.ID}}</td>
+      <td>{{dep.Name}}</td>
+      <td>{{dep.Surname}}</td>
+      <td>{{dep.Patron}}</td>
+      <td>{{dep.Faculty}}</td>
+      <td>{{dep.Specialty}}</td>
+      <td>{{dep.Course}}</td>
+      <td>{{dep.Group}}</td>
+      <td>{{dep.City}}</td>
+      <td>{{dep.PostalCode}}</td>
+      <td>{{dep.Street}}</td>
+      <td>{{dep.Phone}}</td>
+      <td>{{dep.Email}}</td>
+      <td>
+        <button type="button" class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="editClick(dep)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </button>
+        <button type="button" @click="deleteClick(ID)" class="btn btn-light mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+          </svg>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="modal fade" id="exampleModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Имя</span>
+            <input type="text" class="form-control" v-model="Name">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Фамилия</span>
+            <input type="text" class="form-control" v-model="Surname">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Отчество</span>
+            <input type="text" class="form-control" v-model="Patron">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Факультет</span>
+            <input type="text" class="form-control" v-model="Faculty">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Специальность</span>
+            <input type="text" class="form-control" v-model="Specialty">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Курс</span>
+            <input type="text" class="form-control" v-model="Course">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Группа</span>
+            <input type="text" class="form-control" v-model="Group">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Город</span>
+            <input type="text" class="form-control" v-model="City">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Почтовый код</span>
+            <input type="text" class="form-control" v-model="PostalCode">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Улица</span>
+            <input type="text" class="form-control" v-model="Street">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Телефон</span>
+            <input type="text" class="form-control" v-model="Phone">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Почта</span>
+            <input type="text" class="form-control" v-model="Email">
+          </div>
+
+          <button type="button" @click="createClick()" v-if="ID==0" class="btn btn-primary">Создать</button>
+          <button type="button" @click="updateClick()" v-if="ID!=0" class="btn btn-primary">Изменить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import axios from 'axios';
+import stores from './store';
+import ModalForm from './ModalForm.vue';
+import SvgFile from './SvgFile.vue';
+
+export default({
+  new:"#stud",
+  components: {
+    ModalForm,
+    SvgFile
+  },
+    data() {
+        return {
+          studentsWithoutFilter: [],
+          modalTitle: '',
+          NameFilter: '',
+          IDFilter: '',
+          showModal: false,
+          pathTo: "http://localhost:5000/api/department/"
+        };
+      },
+    stores,
+    methods: {
+        refreshData() {
+            axios.get(this.pathTo)
+            .then((response) => {
+                this.$stores.student = response.data;
+                this.$stores.studentsWithoutFilter = response.data;
+            });
+        },
+        addClick() {
+            axios.post(this.pathTo,{
+            Name:this.Name,
+            Surname:this.Surname,
+            Patron:this.Patron,
+            Faculty:this.Faculty,
+            Specialty:this.Specialty,
+            Course:this.Course,
+            Group:this.Group,
+            City:this.City,
+            PostalCode:this.PostalCode,
+            Street:this.Street,
+            Phone:this.Phone,
+            Email:this.Email 
+          }).then((response)=>{
+            this.refreshData();
+            alert(response.data);
+          });
+        },
+        editClick(student) {
+            this.modalTitle = "Изменить";
+            this.ID = student.ID;
+            this.Name = student.Name;
+            this.Surname = student.Surname;
+            this.Patron = student.Patron;
+            this.Faculty = student.Faculty;
+            this.Specialty = student.Specialty;
+            this.Course = student.Course;
+            this.Group = student.Group;
+            this.City = student.City;
+            this.PostalCode = student.PostalCode;
+            this.Street = student.Street;
+            this.Phone = student.Phone;
+            this.Email = student.Email;
+        },
+        createClick() {
+            axios.post(this.pathTo, {
+                Name: this.Name,
+                Surname: this.Surname,
+                Patron: this.Patron,
+                Faculty: this.Faculty,
+                Specialty: this.Specialty,
+                Course: this.Course,
+                Group: this.Group,
+                City: this.City,
+                PostalCode: this.PostalCode,
+                Street: this.Street,
+                Phone: this.Phone,
+                Email: this.Email
+            })
+            .then((response) => {
+                this.refreshData();
+                alert(response.data);
+            });
+        },
+        updateClick() {
+            axios.put(this.pathTo, {
+                ID: this.ID,
+                Name: this.Name,
+                Surname: this.Surname,
+                Patron: this.Patron,
+                Faculty: this.Faculty,
+                Specialty: this.Specialty,
+                Course: this.Course,
+                Group: this.Group,
+                City: this.City,
+                PostalCode: this.PostalCode,
+                Street: this.Street,
+                Phone: this.Phone,
+                Email: this.Email
+            })
+            .then((response) => {
+                this.refreshData();
+                alert(response.data);
+            });
+        },
+        deleteClick(id) {
+            if (!confirm("Вы уверены?")) {
+            return;
+            }
+            axios.delete(this.pathTo + id)
+            .then((response) => {
+                this.refreshData();
+                alert(response.data);
+            });
+        },
+        FilterFn() {
+            var IDFilter = this.IDFilter;
+            var NameFilter = this.NameFilter;
+            this.student = this.studentsWithoutFilter.filter(function (el) {
+                return el.ID.toString().toLowerCase().includes(
+                    IDFilter.toString().trim().toLowerCase()
+                ) &&
+                el.Name.toString().toLowerCase().includes(
+                    NameFilter.toString().trim().toLowerCase()
+                );
+            });
+        },
+        sortResult(prop, asc) {
+            this.student = this.studentsWithoutFilter.sort(function (a, b) {
+            if (asc) {
+                return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+            } else {
+                return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+            }
+            });
+        }
+    },
+    mounted: function () {
+    this.refreshData();
+    }
+})
+</script>
+
+<style>
+.modal-mask{
+  border-style: groove;
+  border-color: 15,83,252;
+}
+.btn-own-cls{
+  border-radius: 4px;
+  border-color: rgba(15, 83, 252);
+  transition: background-color 0.3s ease;
+  color: rgba(15, 83, 252);
+  height: 40px;
+  background-color: white;
+}
+.btn-own-cls:hover {
+  background-color: rgba(15, 83, 252, 1);
+  cursor: pointer;
+  color: white;
+}
+</style>
