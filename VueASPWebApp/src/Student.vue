@@ -2,22 +2,16 @@
 <template id="stud">
 <div>
 <link rel="stylesheet" type="text/css"/>
-
-
 <modal-form v-if="showModal" @close="showModal = false" />
-
 <button id="show-modal" @click="showModal = !showModal" type="button" class="btn-own-cls" >
   Добавить студента
 </button>
-<modal v-if="showModal" @close="showModal = false">
-</modal>
-
-  <table class="table table-striped">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>
         <div class="d-flex flex-row">
-          <input class="form-control m-2" v-model="IDFilter" v-on:keyup="FilterFn()" placeholder="Filter" style="width:100px">
+          <input class="form-control m-2" v-model="IDFilter" @input="FilterFn()" placeholder="Filter" style="width:100px">
           <button type="button" class="btn btn-light" @click="sortResult('ID',true)">
             <svg-file/>
           </button>
@@ -42,7 +36,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="dep in student" :key="dep.ID">
+    <tr v-for="dep in getAllStudents" :key="dep.ID">
       <td>{{dep.ID}}</td>
       <td>{{dep.Name}}</td>
       <td>{{dep.Surname}}</td>
@@ -72,90 +66,16 @@
     </tr>
   </tbody>
 </table>
-<div class="modal fade" id="exampleModal" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Имя</span>
-            <input type="text" class="form-control" v-model="Name">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Фамилия</span>
-            <input type="text" class="form-control" v-model="Surname">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Отчество</span>
-            <input type="text" class="form-control" v-model="Patron">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Факультет</span>
-            <input type="text" class="form-control" v-model="Faculty">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Специальность</span>
-            <input type="text" class="form-control" v-model="Specialty">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Курс</span>
-            <input type="text" class="form-control" v-model="Course">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Группа</span>
-            <input type="text" class="form-control" v-model="Group">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Город</span>
-            <input type="text" class="form-control" v-model="City">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Почтовый код</span>
-            <input type="text" class="form-control" v-model="PostalCode">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Улица</span>
-            <input type="text" class="form-control" v-model="Street">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Телефон</span>
-            <input type="text" class="form-control" v-model="Phone">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">Почта</span>
-            <input type="text" class="form-control" v-model="Email">
-          </div>
-
-          <button type="button" @click="createClick()" v-if="ID==0" class="btn btn-primary">Создать</button>
-          <button type="button" @click="updateClick()" v-if="ID!=0" class="btn btn-primary">Изменить</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import stores from './store';
+import store from './store/store';
 import ModalForm from './ModalForm.vue';
 import SvgFile from './SvgFile.vue';
+import { mapGetters } from 'vuex';
+import _ from 'lodash'
 
 export default({
   new:"#stud",
@@ -163,136 +83,140 @@ export default({
     ModalForm,
     SvgFile
   },
-    data() {
-        return {
-          studentsWithoutFilter: [],
-          modalTitle: '',
-          NameFilter: '',
-          IDFilter: '',
-          showModal: false,
-          pathTo: "http://localhost:5000/api/department/"
-        };
-      },
-    stores,
-    methods: {
-        refreshData() {
-            axios.get(this.pathTo)
-            .then((response) => {
-                this.$stores.student = response.data;
-                this.$stores.studentsWithoutFilter = response.data;
-            });
-        },
-        addClick() {
-            axios.post(this.pathTo,{
-            Name:this.Name,
-            Surname:this.Surname,
-            Patron:this.Patron,
-            Faculty:this.Faculty,
-            Specialty:this.Specialty,
-            Course:this.Course,
-            Group:this.Group,
-            City:this.City,
-            PostalCode:this.PostalCode,
-            Street:this.Street,
-            Phone:this.Phone,
-            Email:this.Email 
-          }).then((response)=>{
-            this.refreshData();
-            alert(response.data);
-          });
-        },
-        editClick(student) {
-            this.modalTitle = "Изменить";
-            this.ID = student.ID;
-            this.Name = student.Name;
-            this.Surname = student.Surname;
-            this.Patron = student.Patron;
-            this.Faculty = student.Faculty;
-            this.Specialty = student.Specialty;
-            this.Course = student.Course;
-            this.Group = student.Group;
-            this.City = student.City;
-            this.PostalCode = student.PostalCode;
-            this.Street = student.Street;
-            this.Phone = student.Phone;
-            this.Email = student.Email;
-        },
-        createClick() {
-            axios.post(this.pathTo, {
-                Name: this.Name,
-                Surname: this.Surname,
-                Patron: this.Patron,
-                Faculty: this.Faculty,
-                Specialty: this.Specialty,
-                Course: this.Course,
-                Group: this.Group,
-                City: this.City,
-                PostalCode: this.PostalCode,
-                Street: this.Street,
-                Phone: this.Phone,
-                Email: this.Email
-            })
-            .then((response) => {
-                this.refreshData();
-                alert(response.data);
-            });
-        },
-        updateClick() {
-            axios.put(this.pathTo, {
-                ID: this.ID,
-                Name: this.Name,
-                Surname: this.Surname,
-                Patron: this.Patron,
-                Faculty: this.Faculty,
-                Specialty: this.Specialty,
-                Course: this.Course,
-                Group: this.Group,
-                City: this.City,
-                PostalCode: this.PostalCode,
-                Street: this.Street,
-                Phone: this.Phone,
-                Email: this.Email
-            })
-            .then((response) => {
-                this.refreshData();
-                alert(response.data);
-            });
-        },
-        deleteClick(id) {
-            if (!confirm("Вы уверены?")) {
-            return;
-            }
-            axios.delete(this.pathTo + id)
-            .then((response) => {
-                this.refreshData();
-                alert(response.data);
-            });
-        },
-        FilterFn() {
-            var IDFilter = this.IDFilter;
-            var NameFilter = this.NameFilter;
-            this.student = this.studentsWithoutFilter.filter(function (el) {
-                return el.ID.toString().toLowerCase().includes(
-                    IDFilter.toString().trim().toLowerCase()
-                ) &&
-                el.Name.toString().toLowerCase().includes(
-                    NameFilter.toString().trim().toLowerCase()
-                );
-            });
-        },
-        sortResult(prop, asc) {
-            this.student = this.studentsWithoutFilter.sort(function (a, b) {
-            if (asc) {
-                return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
-            } else {
-                return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
-            }
-            });
-        }
+  data() {
+    return {
+      studentsWithoutFilter: [],
+      modalTitle: '',
+      NameFilter: '',
+      IDFilter: '',
+      showModal: false,
+      pathTo: "http://localhost:5000/api/department/"
+    };
+  },
+  store,
+  computed: mapGetters(["getAllStudents"]),
+  methods: {
+    refreshData() {                               //этот метод нужно перенести в ./store/store.js
+      axios.get(this.pathTo)
+      .then((response) => {
+          this.$store.student = response.data;
+      });
     },
-    mounted: function () {
-    this.refreshData();
+    addClick() {
+      axios.post(this.pathTo,{
+        Name:this.Name,
+        Surname:this.Surname,
+        Patron:this.Patron,
+        Faculty:this.Faculty,
+        Specialty:this.Specialty,
+        Course:this.Course,
+        Group:this.Group,
+        City:this.City,
+        PostalCode:this.PostalCode,
+        Street:this.Street,
+        Phone:this.Phone,
+        Email:this.Email 
+      }).then((response)=>{
+        this.refreshData();
+        alert(response.data);
+      });
+    },
+    editClick(student) {
+      this.modalTitle = "Изменить";
+      this.ID = student.ID;
+      this.Name = student.Name;
+      this.Surname = student.Surname;
+      this.Patron = student.Patron;
+      this.Faculty = student.Faculty;
+      this.Specialty = student.Specialty;
+      this.Course = student.Course;
+      this.Group = student.Group;
+      this.City = student.City;
+      this.PostalCode = student.PostalCode;
+      this.Street = student.Street;
+      this.Phone = student.Phone;
+      this.Email = student.Email;
+    },
+    createClick() {
+      axios.post(this.pathTo, {
+        Name: this.Name,
+        Surname: this.Surname,
+        Patron: this.Patron,
+        Faculty: this.Faculty,
+        Specialty: this.Specialty,
+        Course: this.Course,
+        Group: this.Group,
+        City: this.City,
+        PostalCode: this.PostalCode,
+        Street: this.Street,
+        Phone: this.Phone,
+        Email: this.Email
+      })
+      .then((response) => {
+        this.refreshData();
+        alert(response.data);
+      });
+    },
+    updateClick() {
+      axios.put(this.pathTo, {
+        ID: this.ID,
+        Name: this.Name,
+        Surname: this.Surname,
+        Patron: this.Patron,
+        Faculty: this.Faculty,
+        Specialty: this.Specialty,
+        Course: this.Course,
+        Group: this.Group,
+        City: this.City,
+        PostalCode: this.PostalCode,
+        Street: this.Street,
+        Phone: this.Phone,
+        Email: this.Email
+      })
+      .then((response) => {
+        this.refreshData();
+        alert(response.data);
+      });
+    },
+    deleteClick(id) {
+      if (!confirm("Вы уверены?")) {
+      return;
+      }
+      axios.delete(this.pathTo + id)
+      .then((response) => {
+          this.refreshData();
+          alert(response.data);
+      });
+    },
+    FilterFn() {
+      var IDFilter = this.IDFilter;
+      var NameFilter = this.NameFilter;
+      this.student = this.studentsWithoutFilter.filter(function (el) {
+          return el.ID.toString().toLowerCase().includes(
+              IDFilter.toString().trim().toLowerCase()
+          ) &&
+          el.Name.toString().toLowerCase().includes(
+              NameFilter.toString().trim().toLowerCase()
+          );
+      });
+    },
+/*  sortResult(prop, asc) {
+      this.student = this.studentsWithoutFilter.sort(function (a, b) {
+      if (asc) {
+          return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+      } else {
+          return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+      }
+      });
     }
+*/
+    sortResult(prop, asc) {
+      this.student = _.orderBy(this.studentsWithoutFilter, prop, asc ? 'asc' : 'desc');                 //Реализовал через lodash, нужно соед с Vuex.Store
+    },
+  },
+  mounted: function () {
+  this.refreshData();
+  }
 })
 </script>
 
@@ -314,4 +238,4 @@ export default({
   cursor: pointer;
   color: white;
 }
-</style>
+</style>./store/store

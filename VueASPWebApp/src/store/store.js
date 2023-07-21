@@ -30,4 +30,7 @@ export default new Vuex.Store({
       commit('addStudent', studentData);
     },
   },
+  getters: {
+    getAllStudents: state => state.students,
+  },
 });
