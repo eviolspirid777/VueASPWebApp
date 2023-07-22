@@ -4,57 +4,57 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-body">
-              Name
-              <input type="text" placeholder="Input name" v-model="formData.Name">
+              Имя
+              <input type="text" placeholder="Введите имя" v-model="formData.Name">
           </div>
           <div class="modal-body">
-              Surname
-              <input type="text" placeholder="Input surname" v-model="formData.Surname">
+              Фамилия
+              <input type="text" placeholder="Введите фамилию" v-model="formData.Surname">
           </div>
           <div class="modal-body">
-              Patron
-              <input type="text" placeholder="Input patron" v-model="formData.Patron">
+              Отчество
+              <input type="text" placeholder="Введите отчество" v-model="formData.Patron">
           </div>
           <div class="modal-body">
-              Faculty
-              <input type="text" placeholder="Input faculty" v-model="formData.Faculty">
+              Факультет
+              <input type="text" placeholder="Введите факультет" v-model="formData.Faculty">
           </div>
           <div class="modal-body">
-              Specialty
-              <input type="text" placeholder="Input name" v-model="formData.Specialty">
+              Специальность
+              <input type="text" placeholder="Введите специальность" v-model="formData.Specialty">
           </div>
           <div class="modal-body">
-              Course
-              <input type="text" placeholder="Input course" v-model="formData.Course">
+              Курс
+              <input type="text" placeholder="Введите курс" v-model="formData.Course">
           </div>
           <div class="modal-body">
-              Group
-              <input type="text" placeholder="Input group" v-model="formData.Group">
+              Группа
+              <input type="text" placeholder="Введите группу" v-model="formData.Group">
           </div>
           <div class="modal-body">
-              City
-              <input type="text" placeholder="Input city" v-model="formData.City">
+              Город
+              <input type="text" placeholder="Введите город" v-model="formData.City">
           </div>
           <div class="modal-body">
-              Postal Code
-              <input type="text" placeholder="Input postal code" v-model="formData.PostalCode">
+              Почтовый индекс
+              <input type="text" placeholder="Введите почтовый индекс" v-model="formData.PostalCode">
           </div>
           <div class="modal-body">
-              Street
-              <input type="text" placeholder="Input street" v-model="formData.Street">
+              Улица
+              <input type="text" placeholder="Введите улицу" v-model="formData.Street">
           </div>
           <div class="modal-body">
-              Phone
-              <input type="text" placeholder="Input phone" v-model="formData.Phone">
+              Телефон
+              <input type="text" placeholder="Введите телефон" v-model="formData.Phone">
           </div>
           <div class="modal-body">
-              Email
-              <input type="text" placeholder="Input email" v-model="formData.Email">
+              Почта
+              <input type="text" placeholder="Введите почту" v-model="formData.Email">
           </div>
           <div class="modal-footer">
-              <button class="btn-own-cls" @click="addClick()">
-                OK
-              </button>
+            <button class="btn-own-cls" style="width: 200px;" @click="addClick()">
+              OK
+            </button>
           </div>
         </div>
       </div>
@@ -85,10 +85,7 @@ export default {
   },
   methods: {
     addClick() {
-      // Dispatch an action to update the Vuex store with the form data
       this.$store.dispatch('addStudent', this.formData);
-
-      // Close the modal
       this.$emit('close');
     },
   },
@@ -111,5 +108,42 @@ export default {
   background-color: rgba(15, 83, 252, 1);
   cursor: pointer;
   color: white;
+}
+/* Модальное окно*/
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-wrapper {
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-body {
+  padding: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.modal-enter-active, .modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter, .modal-leave-to{
+  opacity: 0;
 }
 </style>
