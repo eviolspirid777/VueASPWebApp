@@ -1,68 +1,124 @@
 <template>
-  <transition name="modal">
+  <Transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-body">
-              Имя
-              <input type="text" placeholder="Введите имя" v-model="formData.Name">
+            Имя
+            <input
+              v-model="formData.Name"
+              type="text"
+              placeholder="Введите имя"
+            >
           </div>
           <div class="modal-body">
-              Фамилия
-              <input type="text" placeholder="Введите фамилию" v-model="formData.Surname">
+            Фамилия
+            <input
+              v-model="formData.Surname"
+              type="text"
+              placeholder="Введите фамилию"
+            >
           </div>
           <div class="modal-body">
-              Отчество
-              <input type="text" placeholder="Введите отчество" v-model="formData.Patron">
+            Отчество
+            <input
+              v-model="formData.Patron"
+              type="text"
+              placeholder="Введите отчество"
+            >
           </div>
           <div class="modal-body">
-              Факультет
-              <input type="text" placeholder="Введите факультет" v-model="formData.Faculty">
+            Факультет
+            <input
+              v-model="formData.Faculty"
+              type="text"
+              placeholder="Введите факультет"
+            >
           </div>
           <div class="modal-body">
-              Специальность
-              <input type="text" placeholder="Введите специальность" v-model="formData.Specialty">
+            Специальность
+            <input
+              v-model="formData.Specialty"
+              type="text"
+              placeholder="Введите специальность"
+            >
           </div>
           <div class="modal-body">
-              Курс
-              <input type="text" placeholder="Введите курс" v-model="formData.Course">
+            Курс
+            <input
+              v-model="formData.Course"
+              type="text"
+              placeholder="Введите курс"
+            >
           </div>
           <div class="modal-body">
-              Группа
-              <input type="text" placeholder="Введите группу" v-model="formData.Group">
+            Группа
+            <input
+              v-model="formData.Group"
+              type="text"
+              placeholder="Введите группу"
+            >
           </div>
           <div class="modal-body">
-              Город
-              <input type="text" placeholder="Введите город" v-model="formData.City">
+            Город
+            <input
+              v-model="formData.City"
+              type="text"
+              placeholder="Введите город"
+            >
           </div>
           <div class="modal-body">
-              Почтовый индекс
-              <input type="text" placeholder="Введите почтовый индекс" v-model="formData.PostalCode">
+            Почтовый индекс
+            <input
+              v-model="formData.PostalCode"
+              type="text"
+              placeholder="Введите почтовый индекс"
+            >
           </div>
           <div class="modal-body">
-              Улица
-              <input type="text" placeholder="Введите улицу" v-model="formData.Street">
+            Улица
+            <input
+              v-model="formData.Street"
+              type="text"
+              placeholder="Введите улицу"
+            >
           </div>
           <div class="modal-body">
-              Телефон
-              <input type="text" placeholder="Введите телефон" v-model="formData.Phone">
+            Телефон
+            <input
+              v-model="formData.Phone"
+              type="text"
+              placeholder="Введите телефон"
+            >
           </div>
           <div class="modal-body">
-              Почта
-              <input type="text" placeholder="Введите почту" v-model="formData.Email">
+            Почта
+            <input
+              v-model="formData.Email"
+              type="text"
+              placeholder="Введите почту"
+            >
           </div>
           <div class="modal-footer">
-            <button class="btn-own-cls" style="width: 200px;" @click="closeWindow">
-              close
+            <button
+              class="btn-own-cls"
+              style="width: 200px;"
+              @click="closeWindow"
+            >
+              Закрыть
             </button>
-            <button class="btn-own-cls" style="width: 200px;" @click="addClick()">
+            <button
+              class="btn-own-cls"
+              style="width: 200px;"
+              @click="addClick()"
+            >
               OK
             </button>
           </div>
         </div>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script>
@@ -71,30 +127,30 @@ export default {
   data() {
     return {
       formData: {
-        Name: '',
-        Surname: '',
-        Patron: '',
-        Faculty: '',
-        Specialty: '',
-        Course: '',
-        Group: '',
-        City: '',
-        PostalCode: '',
-        Street: '',
-        Phone: '',
-        Email: '',
-      },
+        Name: "",
+        Surname: "",
+        Patron: "",
+        Faculty: "",
+        Specialty: "",
+        Course: "",
+        Group: "",
+        City: "",
+        PostalCode: "",
+        Street: "",
+        Phone: "",
+        Email: ""
+      }
     };
   },
   methods: {
     addClick() {
-      this.$store.dispatch('addStudent', this.formData);
+      this.$store.dispatch("addStudent", this.formData);
       this.closeWindow();
     },
-    closeWindow(){
-      this.$emit('close');
+    closeWindow() {
+      this.$emit("close");
     }
-  },
+  }
 };
 </script>
 <style>
