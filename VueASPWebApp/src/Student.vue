@@ -77,8 +77,7 @@
 import axios from 'axios';
 import store from './store/store';
 import ModalForm from './ModalForm.vue';
-import { mapGetters } from 'vuex';
-import _ from 'lodash'
+import { mapGetters, mapMutations } from 'vuex';
 
 export default({
   new:"#stud",
@@ -158,16 +157,6 @@ export default({
         alert(response.data);
       });
     },
-    // deleteClick(id) {
-    //   if (!confirm("Вы уверены?")) {
-    //   return;
-    //   }
-    //   axios.delete(this.pathTo + id)
-    //   .then((response) => {
-    //       this.refreshData();
-    //       alert(response.data);
-    //   });
-    // },
     deleteClick(ID) {
       if (!confirm("Вы уверены?")) {
       return;
@@ -189,20 +178,22 @@ export default({
           );
       });
     },
-/*  sortResult(prop, asc) {
-      this.student = this.studentsWithoutFilter.sort(function (a, b) {
-      if (asc) {
-          return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
-      } else {
-          return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
-      }
-      });
-    }
-*/
+
+    //   sortResult(prop, asc) {
+    //   this.student = this.studentsWithoutFilter.sort(function (a, b) {
+    //   if (asc) {
+    //       return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+    //   } else {
+    //       return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+    //   }
+    //   });
+    // },
+
     sortResult(prop, asc) {
-      this.student = _.orderBy(this.studentsWithoutFilter, prop, asc ? 'asc' : 'desc');                 //Реализовал через lodash, нужно соед с Vuex.Store
+      this.$store.commit('sortStudents', { prop, asc });                 //Реализовал через lodash, нужно соед с Vuex.Store
     },
-  },
+    ...mapMutations(['sortStudents']),
+    },
   mounted: function () {
   this.refreshData();
   }

@@ -30,8 +30,8 @@ export default new Vuex.Store({
         return students;
       });
     },
-  async deleteStudent({ commit }, id) {
-      return axios.delete("http://localhost:5000/api/department/" + id).then((response) => {
+  async deleteStudent({ commit }, ID) {
+      return axios.delete("http://localhost:5000/api/department/" + ID).then((response) => {
         alert(response.data);
         return commit('fetchStudents');
       });

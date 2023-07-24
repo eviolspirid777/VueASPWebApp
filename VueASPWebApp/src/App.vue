@@ -19,11 +19,7 @@
     <router-view></router-view>
   </div>
 </template>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.2/dist/vue-router.min.js"></script>
-<script src="home.js"></script>
-<script src="student.js"></script>
+
 <script>
 import Vue from 'vue';
 import VueRouter from 'vue-router';
