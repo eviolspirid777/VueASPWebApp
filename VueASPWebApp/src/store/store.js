@@ -1,33 +1,40 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     students: [],
-    ID: 0,
-    Name: '',
-    Surname: '',
-    Patron: '',
-    Faculty: '',
-    Specialty: '',
-    Course: '',
-    Group: '',
-    City: '',
-    PostalCode: '',
-    Street: '',
-    Phone: '',
-    Email: ''
   },
   mutations: {
     addStudent(state, studentData) {
       state.students.push(studentData);
     },
+    setStudents(state, students) {
+      state.students = students;
+    },
   },
   actions: {
-    addStudent({ commit }, studentData) {
+  async addStudent({ commit }, studentData) {
       commit('addStudent', studentData);
+      return axios.post("http://localhost:5000/api/department/", studentData).then((response) => {
+        return response.data;
+      });
+    },
+  async fetchStudents({ commit }) {
+      return axios.get("http://localhost:5000/api/department/").then((response) => {
+        const students = response.data;
+        commit('setStudents', students);
+        return students;
+      });
+    },
+  async deleteStudent({ commit }, id) {
+      return axios.delete("http://localhost:5000/api/department/" + id).then((response) => {
+        alert(response.data);
+        return commit('fetchStudents');
+      });
     },
   },
   getters: {

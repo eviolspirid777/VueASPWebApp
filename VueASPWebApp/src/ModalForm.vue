@@ -52,6 +52,9 @@
               <input type="text" placeholder="Введите почту" v-model="formData.Email">
           </div>
           <div class="modal-footer">
+            <button class="btn-own-cls" style="width: 200px;" @click="closeWindow">
+              close
+            </button>
             <button class="btn-own-cls" style="width: 200px;" @click="addClick()">
               OK
             </button>
@@ -64,7 +67,7 @@
 
 <script>
 export default {
-  props: ['showModal'],
+  // props: ['showModal'],
   data() {
     return {
       formData: {
@@ -86,8 +89,11 @@ export default {
   methods: {
     addClick() {
       this.$store.dispatch('addStudent', this.formData);
-      this.$emit('close');
+      this.closeWindow();
     },
+    closeWindow(){
+      this.$emit('close');
+    }
   },
 };
 </script>
