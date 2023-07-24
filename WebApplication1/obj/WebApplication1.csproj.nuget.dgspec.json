@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\vueprj\\VueASPWebApp\\WebHost\\WebApplication1\\WebApplication1.csproj": {}
+    "C:\\vueprj\\VueASPWebApp\\WebApplication1\\WebApplication1.csproj": {}
   },
   "projects": {
-    "C:\\vueprj\\VueASPWebApp\\WebHost\\WebApplication1\\WebApplication1.csproj": {
+    "C:\\vueprj\\VueASPWebApp\\WebApplication1\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\vueprj\\VueASPWebApp\\WebHost\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "C:\\vueprj\\VueASPWebApp\\WebApplication1\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "C:\\vueprj\\VueASPWebApp\\WebHost\\WebApplication1\\WebApplication1.csproj",
+        "projectPath": "C:\\vueprj\\VueASPWebApp\\WebApplication1\\WebApplication1.csproj",
         "packagesPath": "C:\\Users\\eviol\\.nuget\\packages\\",
-        "outputPath": "C:\\vueprj\\VueASPWebApp\\WebHost\\WebApplication1\\obj\\",
+        "outputPath": "C:\\vueprj\\VueASPWebApp\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\eviol\\AppData\\Roaming\\NuGet\\NuGet.Config",
