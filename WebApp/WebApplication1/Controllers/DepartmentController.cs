@@ -25,13 +25,6 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            /*
-            string query = @"
-                select DepartmentId as ""DepartmentId"",
-                        DepartmentName as ""DepartmentName""
-                from Department
-            ";*/
-
 			string query = @"
                         SELECT 
                             ID AS ""ID"",
@@ -136,13 +129,6 @@ namespace WebApplication1.Controllers
 		[HttpPut]
         public JsonResult Put(Student dep)
         {
-			/*
-            string query = @"
-                update Department
-                set DepartmentName = @DepartmentName
-                where DepartmentId=@DepartmentId 
-            ";*/
-
 			string query = @"
                         UPDATE Students
                         SET
@@ -197,13 +183,6 @@ namespace WebApplication1.Controllers
 		[HttpDelete("{ID}")]
 		public JsonResult Delete(int ID)
 		{
-			/*
-            string query = @"
-                delete from Department
-                where DepartmentId=@DepartmentId 
-            ";
-            */
-
 			string query = @"
                         DELETE FROM Students
                         WHERE ID = @ID;
