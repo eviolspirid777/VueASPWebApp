@@ -82,6 +82,10 @@
           v-for="dep in getAllStudents"
           :key="dep.ID"
         >
+          <EditStud
+            v-if="ShowModalEdit"
+            :form-data="selectedStudent(dep)"
+          />
           <td>{{ dep.ID }}</td>
           <td>{{ dep.Name }}</td>
           <td>{{ dep.Surname }}</td>
@@ -101,7 +105,7 @@
               class="btn btn-light mr-1"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="showModal = !showModal"
+              @click="ShowModalEdit = !ShowModalEdit"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -143,6 +147,7 @@
 
 <script>
 import axios from "axios";
+import EditStud from "./EditStudent.vue";
 import ModalForm from "./ModalForm.vue";
 import store from "./store/store";
 import { mapGetters } from "vuex";
@@ -150,7 +155,8 @@ import { mapGetters } from "vuex";
 export default ({
   new: "#stud",
   components: {
-    ModalForm
+    ModalForm,
+    EditStud
   },
   data() {
     return {
@@ -158,7 +164,9 @@ export default ({
       modalTitle: "",
       NameFilter: "", //фильтр по имени
       IDFilter: "", //фильтр по id
-      showModal: false, //буль для отображения окна
+      showModal: false, //буль для отображения окна добавления студента
+      showModalEdit: false, //буль для отображения окна редактирования студента
+      selectedStudent: null,
       pathTo: "http://localhost:5000/api/department/", //путь
       payload: {
         Name: this.Name,
@@ -193,22 +201,12 @@ export default ({
         alert(response.data);
       });
     },
-    editClick(student) {
+    editClick(dep) {
       this.modalTitle = "Изменить";
-      this.Name = student.Name;
-      this.Surname = student.Surname;
-      this.Patron = student.Patron;
-      this.Faculty = student.Faculty;
-      this.Specialty = student.Specialty;
-      this.Course = student.Course;
-      this.Group = student.Group;
-      this.City = student.City;
-      this.PostalCode = student.PostalCode;
-      this.Street = student.Street;
-      this.Phone = student.Phone;
-      this.Email = student.Email;
+      this.selectedStudent = { ...dep };
+      this.ShowModalEdit = true;
     },
-    updateClick() {
+    updateClick() { //Реализуй через VUEX.Store
       axios.put(this.pathTo, {
         Name: this.Name,
         Surname: this.Surname,
@@ -285,4 +283,4 @@ export default ({
   cursor: pointer;
   color: white;
 }
-</style>./store/store
+</style>
