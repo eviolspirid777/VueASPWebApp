@@ -83,7 +83,7 @@
           :key="dep.ID"
         >
           <EditStud
-            v-if="ShowModalEdit"
+            v-if="showModalEdit"
             :form-data="selectedStudent(dep)"
           />
           <td>{{ dep.ID }}</td>
@@ -105,7 +105,7 @@
               class="btn btn-light mr-1"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="ShowModalEdit = !ShowModalEdit"
+              @click="editClick(dep)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -158,6 +158,7 @@ export default ({
     ModalForm,
     EditStud
   },
+  store,
   data() {
     return {
       studentsWithoutFilter: [],
@@ -165,7 +166,7 @@ export default ({
       NameFilter: "", //фильтр по имени
       IDFilter: "", //фильтр по id
       showModal: false, //буль для отображения окна добавления студента
-      showModalEdit: false, //буль для отображения окна редактирования студента
+      showModalEdit: false,
       selectedStudent: null,
       pathTo: "http://localhost:5000/api/department/", //путь
       payload: {
@@ -184,7 +185,6 @@ export default ({
       }
     };
   },
-  store,
   computed: mapGetters(["getAllStudents"]),
   mounted: function() {
     this.refreshData();
@@ -202,9 +202,8 @@ export default ({
       });
     },
     editClick(dep) {
-      this.modalTitle = "Изменить";
       this.selectedStudent = { ...dep };
-      this.ShowModalEdit = true;
+      this.showModalEdit = true;
     },
     updateClick() { //Реализуй через VUEX.Store
       axios.put(this.pathTo, {
