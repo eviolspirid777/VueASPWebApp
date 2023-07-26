@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AZf/50VP/XPuiC4kNOcOzdXK/t89vAGVsviY2J2FH0lqjCNhH8LIDvcMb6zXaNMK1qO8SEzaVTv+gE+h71AM/A==",
+  "dgSpecHash": "E8YA7DtbdDwLzTEeFphBTnyluReBVHA+Td4e4kn6SYuM9q4qImUn5AEeX494WLag8hQqHefsjU+is4yFFKtKQQ==",
   "success": true,
-  "projectFilePath": "C:\\vueprj\\VueASPWebApp\\WebApp\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "C:\\vueprj\\VueTest\\VueASPWebApp\\WebApp\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\eviol\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.16\\microsoft.aspnetcore.jsonpatch.3.1.16.nupkg.sha512",
     "C:\\Users\\eviol\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.16\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.16.nupkg.sha512",

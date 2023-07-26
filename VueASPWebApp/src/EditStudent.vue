@@ -3,6 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+          <h1>Редактирование студента</h1>
           <div class="modal-body">
             Имя
             <input
@@ -103,7 +104,7 @@
             <button
               class="btn-own-cls"
               style="width: 200px;"
-              @click="closeWindow"
+              @click="closeWindow()"
             >
               Закрыть
             </button>
@@ -127,11 +128,13 @@ export default {
     formData: {}
   },
   data() {
-    return {};
+    return {
+      localFormData: { ...this.formData }
+    };
   },
   methods: {
     addClick() {
-      this.$store.dispatch("addStudent", this.formData);
+      this.$store.dispatch("addStudent", this.localFormData);
       this.closeWindow();
     },
     closeWindow() {
@@ -178,6 +181,7 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 .modal-body {
 padding: 10px;
+font-size: 20px;
 }
 .modal-footer {
 display: flex;
@@ -189,5 +193,13 @@ transition: opacity 0.3s ease;
 }
 .modal-enter, .modal-leave-to{
 opacity: 0;
+}
+h1{
+  color: rgba(15, 83, 252, 1);
+  font-size: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 40px;
 }
 </style>

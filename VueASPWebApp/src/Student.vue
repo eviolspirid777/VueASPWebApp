@@ -8,6 +8,11 @@
       v-if="showModal"
       @close="showModal = false"
     />
+    <EditStud
+      v-if="showModalEdit"
+      :form-data="selectedStudent"
+      @close="showModalEdit = false"
+    />
     <button
       id="show-modal"
       type="button"
@@ -82,10 +87,6 @@
           v-for="dep in getAllStudents"
           :key="dep.ID"
         >
-          <EditStud
-            v-if="showModalEdit"
-            :form-data="selectedStudent(dep)"
-          />
           <td>{{ dep.ID }}</td>
           <td>{{ dep.Name }}</td>
           <td>{{ dep.Surname }}</td>
@@ -167,7 +168,7 @@ export default ({
       IDFilter: "", //фильтр по id
       showModal: false, //буль для отображения окна добавления студента
       showModalEdit: false,
-      selectedStudent: null,
+      selectedStudent: {},
       pathTo: "http://localhost:5000/api/department/", //путь
       payload: {
         Name: this.Name,
@@ -202,7 +203,7 @@ export default ({
       });
     },
     editClick(dep) {
-      this.selectedStudent = { ...dep };
+      this.selectedStudent = dep;
       this.showModalEdit = true;
     },
     updateClick() { //Реализуй через VUEX.Store

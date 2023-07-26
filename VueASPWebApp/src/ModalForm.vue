@@ -3,6 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+          <h1>Добавить Студента</h1>
           <div class="modal-body">
             Имя
             <input
@@ -123,7 +124,6 @@
 
 <script>
 export default {
-  // props: ['showModal'],
   data() {
     return {
       formData: {
@@ -144,6 +144,12 @@ export default {
   },
   methods: {
     addClick() {
+      for (const key in this.formData) {
+        if (this.formData[key] === "") {
+          alert(`Пожалуйста заполните ${key} поле!`);
+          return;
+        }
+      }
       this.$store.dispatch("addStudent", this.formData);
       this.closeWindow();
     },
@@ -207,5 +213,14 @@ export default {
 
 .modal-enter, .modal-leave-to{
   opacity: 0;
+}
+
+h1{
+  color: rgba(15, 83, 252, 1);
+  font-size: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 40px;
 }
 </style>

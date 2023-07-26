@@ -353,11 +353,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\vueprj\\VueASPWebApp\\WebApp\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\vueprj\\VueTest\\VueASPWebApp\\WebApp\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\vueprj\\VueASPWebApp\\WebApp\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\vueprj\\VueTest\\VueASPWebApp\\WebApp\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\eviol\\.nuget\\packages\\",
-      "outputPath": "C:\\vueprj\\VueASPWebApp\\WebApp\\WebApplication1\\obj\\",
+      "outputPath": "C:\\vueprj\\VueTest\\VueASPWebApp\\WebApp\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\eviol\\AppData\\Roaming\\NuGet\\NuGet.Config",
