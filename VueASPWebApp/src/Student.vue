@@ -186,7 +186,12 @@ export default ({
       }
     };
   },
-  computed: mapGetters(["getAllStudents"]),
+  computed: {
+    ...mapGetters(["getAllStudents", "getFilteredStudents", "getSortProperty", "getSortAsc"]), // Добавьте геттер getFilteredStudents
+    studentsList() {
+      return this.getFilteredStudents.length > 0 ? this.getFilteredStudents : this.getAllStudents;
+    }
+  },
   mounted: function() {
     this.refreshData();
   },
@@ -216,30 +221,11 @@ export default ({
       });
     },
     FilterFn() {
-      let IDFilter = this.IDFilter;
-      let NameFilter = this.NameFilter;
-      this.student = this.studentsWithoutFilter.filter(function(el) {
-        return el.ID.toString().toLowerCase().includes(
-          IDFilter.toString().trim().toLowerCase()
-        ) &&
-          el.Name.toString().toLowerCase().includes(
-            NameFilter.toString().trim().toLowerCase()
-          );
-      });
+      const { IDFilter, NameFilter } = this;
+      this.$store.dispatch("filterStudents", { IDFilter, NameFilter });
     },
-
-    //   sortResult(prop, asc) {
-    //   this.student = this.studentsWithoutFilter.sort(function (a, b) {
-    //   if (asc) {
-    //       return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
-    //   } else {
-    //       return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
-    //   }
-    //   });
-    // },
-
     sortResult(prop, asc) {
-      this.$store.commit("sortStudents", { prop, asc }); //Реализовал через lodash, нужно соед с Vuex.Store
+      this.$store.dispatch("sortStudents", { prop, asc });
     }
   }
 });
