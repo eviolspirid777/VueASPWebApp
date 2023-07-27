@@ -147,7 +147,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import EditStud from "./EditStudent.vue";
 import ModalForm from "./ModalForm.vue";
 import store from "./store/store";
@@ -171,6 +170,7 @@ export default ({
       selectedStudent: {},
       pathTo: "http://localhost:5000/api/department/", //путь
       payload: {
+        ID: this.ID,
         Name: this.Name,
         Surname: this.Surname,
         Patron: this.Patron,
@@ -205,26 +205,6 @@ export default ({
     editClick(dep) {
       this.selectedStudent = dep;
       this.showModalEdit = true;
-    },
-    updateClick() { //Реализуй через VUEX.Store
-      axios.put(this.pathTo, {
-        Name: this.Name,
-        Surname: this.Surname,
-        Patron: this.Patron,
-        Faculty: this.Faculty,
-        Specialty: this.Specialty,
-        Course: this.Course,
-        Group: this.Group,
-        City: this.City,
-        PostalCode: this.PostalCode,
-        Street: this.Street,
-        Phone: this.Phone,
-        Email: this.Email
-      })
-        .then(response => {
-          this.refreshData();
-          alert(response.data);
-        });
     },
     deleteClick(ID) {
       if (!confirm("Вы уверены?")) {

@@ -36,6 +36,13 @@ export default new Vuex.Store({
         alert(response.data);
         return commit("fetchStudents");
       });
+    },
+    async updateStudent({ commit }, studentData) {
+      return axios.put(API_URL, studentData).then(response => {
+        alert(response.data);
+        commit("fetchStudents");
+        return response.data;
+      });
     }
   },
   getters: {

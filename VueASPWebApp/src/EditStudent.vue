@@ -111,7 +111,7 @@
             <button
               class="btn-own-cls"
               style="width: 200px;"
-              @click="addClick()"
+              @click="updateClick()"
             >
               OK
             </button>
@@ -133,9 +133,13 @@ export default {
     };
   },
   methods: {
-    addClick() {
-      this.$store.dispatch("addStudent", this.localFormData);
-      this.closeWindow();
+    updateClick() {
+      this.$store.dispatch("updateStudent", this.formData)
+        .then(response => {
+          this.$emit("refreshData");
+          alert(response.data);
+        });
+      this.$emit("close");
     },
     closeWindow() {
       this.$emit("close");

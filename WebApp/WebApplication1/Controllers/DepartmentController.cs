@@ -145,7 +145,7 @@ namespace WebApplication1.Controllers
                             ""Phone"" = @Phone,
                             ""Email"" = @Email
                         WHERE
-                            ""ID"" = @ID;
+                            ""Phone"" = @Phone;
                         ";
 
 			DataTable table = new DataTable();
