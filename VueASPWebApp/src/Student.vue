@@ -168,7 +168,6 @@ export default ({
       showModal: false, //буль для отображения окна добавления студента
       showModalEdit: false,
       selectedStudent: {},
-      pathTo: "http://localhost:5000/api/department/", //путь
       payload: {
         ID: this.ID,
         Name: this.Name,
@@ -187,7 +186,7 @@ export default ({
     };
   },
   computed: {
-    ...mapGetters(["getAllStudents", "getFilteredStudents", "getSortProperty", "getSortAsc"]), // Добавьте геттер getFilteredStudents
+    ...mapGetters(["getAllStudents"]),
     studentsList() {
       return this.getFilteredStudents.length > 0 ? this.getFilteredStudents : this.getAllStudents;
     }
@@ -221,11 +220,10 @@ export default ({
       });
     },
     FilterFn() {
-      const { IDFilter, NameFilter } = this;
-      this.$store.dispatch("filterStudents", { IDFilter, NameFilter });
+
     },
-    sortResult(prop, asc) {
-      this.$store.dispatch("sortStudents", { prop, asc });
+    sortResult() {
+
     }
   }
 });
