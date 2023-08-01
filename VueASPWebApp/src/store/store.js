@@ -1,3 +1,4 @@
+import _ from "lodash";
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
@@ -7,7 +8,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    students: []
+    students: [],
+    studentsWithoutFilter: [],
+    studName: "",
+    sortProperty: "",
+    sortAsc: ""
   },
   mutations: {
     addStudent(state, studentData) {
@@ -15,6 +20,13 @@ export default new Vuex.Store({
     },
     setStudents(state, students) {
       state.students = students;
+    },
+    setSort(state, { prop, asc }) {
+      state.sortProperty = prop;
+      state.sortAsc = asc;
+    },
+    setFilter(state, studName) {
+      state.studName = studName;
     }
   },
   actions: {
@@ -27,7 +39,9 @@ export default new Vuex.Store({
     async fetchStudents({ commit }) {
       return axios.get(API_URL).then(response => {
         const students = response.data;
+        const studentsWithoutFilter = response.data;
         commit("setStudents", students);
+        commit("setStudents", studentsWithoutFilter);
         return students;
       });
     },
@@ -43,9 +57,25 @@ export default new Vuex.Store({
         commit("fetchStudents");
         return response.data;
       });
+    },
+    async sortStudents({ commit }, { prop, asc }) {
+      const response = await axios.get(API_URL);
+      const studentsTemp = response.data;
+      const sortedStudents = _.orderBy(studentsTemp, [prop], [asc ? "asc" : "desc"]);
+      commit("setStudents", sortedStudents);
+    },
+    async filterStudents(ctx, nameFilt) {
+      ctx.commit("setFilter", nameFilt);
+      const response = await axios.get(API_URL);
+      const students = response.data.filter(function(el) {
+        return el.Name.toString().toLowerCase().includes(nameFilt.toString().trim().toLowerCase());
+      });
+      ctx.commit("setStudents", students);
     }
   },
   getters: {
-    getAllStudents: state => state.students
+    getAllStudents: state => state.students,
+    getSortProperty: state => state.sortProperty,
+    getSortAsc: state => state.sortAsc
   }
 });

@@ -27,7 +27,7 @@
           <th>
             <div class="d-flex flex-row">
               <input
-                v-model="IDFilter"
+                v-model="NameFilter"
                 class="form-control m-2"
                 placeholder="Фильтр"
                 style="width:100px"
@@ -164,7 +164,6 @@ export default ({
       studentsWithoutFilter: [],
       modalTitle: "",
       NameFilter: "", //фильтр по имени
-      IDFilter: "", //фильтр по id
       showModal: false, //буль для отображения окна добавления студента
       showModalEdit: false,
       selectedStudent: {},
@@ -220,10 +219,10 @@ export default ({
       });
     },
     FilterFn() {
-
+      this.$store.dispatch("filterStudents", this.NameFilter);
     },
-    sortResult() {
-
+    sortResult(prop, asc) {
+      this.$store.dispatch("sortStudents", { prop, asc });
     }
   }
 });
