@@ -1,8 +1,6 @@
-import _ from "lodash";
-import axios from "axios";
+import DataClient from "./modules/api";
 import Vue from "vue";
 import Vuex from "vuex";
-import { API_URL } from "./modules/api";
 
 Vue.use(Vuex);
 
@@ -21,56 +19,60 @@ export default new Vuex.Store({
     setStudents(state, students) {
       state.students = students;
     },
+    setStudentsWithoutFilter(state, studData) {
+      state.studentsWithoutFilter = studData;
+    },
     setSort(state, { prop, asc }) {
       state.sortProperty = prop;
       state.sortAsc = asc;
     },
-    setFilter(state, studName) {
+    setFilt(state, studName) {
       state.studName = studName;
     }
   },
   actions: {
     async addStudent({ commit }, studentData) {
       commit("addStudent", studentData);
-      return axios.post(API_URL, studentData).then(response => {
-        return response.data;
-      });
+      DataClient.postStudent(studentData);
     },
     async fetchStudents({ commit }) {
-      return axios.get(API_URL).then(response => {
-        const students = response.data;
-        const studentsWithoutFilter = response.data;
-        commit("setStudents", students);
-        commit("setStudents", studentsWithoutFilter);
-        return students;
-      });
+      const students = await DataClient.getAllData();
+      const studentsWithoutFilter = await DataClient.getAllData();
+      commit("setStudents", students);
+      commit("setStudentsWithoutFilter", studentsWithoutFilter);
+      return students;
     },
     async deleteStudent({ commit }, ID) {
-      return axios.delete(API_URL + ID).then(response => {
-        alert(response.data);
-        return commit("fetchStudents");
-      });
+      await DataClient.deleteStudent(ID);
+      commit("fetchStudents");
     },
     async updateStudent({ commit }, studentData) {
-      return axios.put(API_URL, studentData).then(response => {
-        alert(response.data);
-        commit("fetchStudents");
-        return response.data;
-      });
+      DataClient.updateStudentData(studentData);
+      commit("fetchStudents");
+      return;
     },
-    async sortStudents({ commit }, { prop, asc }) {
-      const response = await axios.get(API_URL);
-      const studentsTemp = response.data;
-      const sortedStudents = _.orderBy(studentsTemp, [prop], [asc ? "asc" : "desc"]);
-      commit("setStudents", sortedStudents);
+    async sortStudents({ commit }, { prop, asc }) { //исправленная функция
+      let studentsTemp = await DataClient.getAllData();
+      const stud = studentsTemp.data.sort(function(a, b) {
+        if (asc) {
+          return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        }
+        else {
+          return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        }
+      });
+      commit("setStudents", stud);
     },
     async filterStudents(ctx, nameFilt) {
-      ctx.commit("setFilter", nameFilt);
-      const response = await axios.get(API_URL);
-      const students = response.data.filter(function(el) {
-        return el.Name.toString().toLowerCase().includes(nameFilt.toString().trim().toLowerCase());
-      });
-      ctx.commit("setStudents", students);
+      ctx.commit("setFilt", nameFilt); //присваиваем значения idFilt и nameFilt
+      let StudentsWithoutFilter = await DataClient.getAllData();
+      let studs = StudentsWithoutFilter.data.filter(
+        function(el) {
+          return el.Name.toString().toLowerCase().includes(
+            nameFilt.toString().trim().toLowerCase()
+          );
+        });
+      ctx.commit("setStudents", studs);
     }
   },
   getters: {
