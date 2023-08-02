@@ -53,7 +53,7 @@ export default new Vuex.Store({
     },
     async sortStudents({ commit }, { prop, asc }) { //исправленная функция
       let studentsTemp = await DataClient.getAllData();
-      const stud = studentsTemp.data.sort(function(a, b) {
+      const stud = studentsTemp.sort(function(a, b) {
         if (asc) {
           return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
         }
@@ -64,9 +64,9 @@ export default new Vuex.Store({
       commit("setStudents", stud);
     },
     async filterStudents(ctx, nameFilt) {
-      ctx.commit("setFilt", nameFilt); //присваиваем значения idFilt и nameFilt
+      ctx.commit("setFilt", nameFilt); //присваиваем и nameFilt
       let StudentsWithoutFilter = await DataClient.getAllData();
-      let studs = StudentsWithoutFilter.data.filter(
+      let studs = StudentsWithoutFilter.filter(
         function(el) {
           return el.Name.toString().toLowerCase().includes(
             nameFilt.toString().trim().toLowerCase()

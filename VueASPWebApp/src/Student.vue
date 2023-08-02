@@ -161,7 +161,6 @@ export default ({
   store,
   data() {
     return {
-      studentsWithoutFilter: [],
       modalTitle: "",
       NameFilter: "", //фильтр по имени
       showModal: false, //буль для отображения окна добавления студента
@@ -185,10 +184,7 @@ export default ({
     };
   },
   computed: {
-    ...mapGetters(["getAllStudents"]),
-    studentsList() {
-      return this.getFilteredStudents.length > 0 ? this.getFilteredStudents : this.getAllStudents;
-    }
+    ...mapGetters(["getAllStudents"])
   },
   mounted: function() {
     this.refreshData();
