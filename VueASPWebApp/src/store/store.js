@@ -36,12 +36,9 @@ export default new Vuex.Store({
       DataClient.postStudent(studentData);
     },
     async fetchStudents({ commit, state }) {
-      const students = await DataClient.getAllData();
+      const students = await DataClient.getAllData(state.studName, state.sortProperty, state.sortAsc || undefined);
       commit("setStudents", students);
       commit("setStudentsWithoutFilter", students);
-      if (state.studName !== "") {
-        commit("filterStudents", state.studName);
-      }
       return students;
     },
     async deleteStudent({ commit }, ID) {
@@ -54,25 +51,19 @@ export default new Vuex.Store({
       return;
     },
     async sortStudents({ commit, state }, { prop, asc }) {
-      commit("setSort", prop, asc);
-      const studentsTemp = state.studentsWithoutFilter;
-      const stud = studentsTemp.sort(function(a, b) {
-        if (asc) {
-          return a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0;
-        }
-        else {
-          return b[prop] < a[prop] ? -1 : b[prop] > a[prop] ? 1 : 0;
-        }
-      });
-      commit("setStudents", stud);
+      commit("setSort", { prop, asc });
+      const sortBy = state.sortProperty;
+      const sortAsc = state.sortAsc;
+      const students = await DataClient.getAllData("", sortBy, sortAsc);
+      commit("setStudents", students);
     },
     async filterStudents({ commit, state }, nameFilt) {
       commit("setFilt", nameFilt);
-      const studentsWithoutFilter = state.studentsWithoutFilter;
-      const studs = studentsWithoutFilter.filter(el =>
-        el.Name.toLowerCase().includes(nameFilt.trim().toLowerCase())
-      );
-      commit("setStudents", studs);
+      const filter = state.studName;
+      const sortBy = state.sortProperty;
+      const sortAsc = state.sortAsc;
+      const students = await DataClient.getAllData(filter, sortBy, sortAsc);
+      commit("setStudents", students);
     }
   },
   getters: {

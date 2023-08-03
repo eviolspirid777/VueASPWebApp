@@ -3,8 +3,14 @@ import axios from "axios";
 const API_URL = "http://localhost:5000/api/department/";
 
 const DataClient = {
-  async getAllData() {
-    const response = await axios.get(API_URL);
+  async getAllData(filter = "", sortBy = "", sortAsc = true) {
+    const response = await axios.get(API_URL, {
+      params: {
+        filter,
+        sortBy,
+        sortAsc
+      }
+    });
     return response.data;
   },
   async deleteStudent(ID) {

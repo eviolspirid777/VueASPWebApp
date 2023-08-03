@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
 
 			if (!string.IsNullOrEmpty(filter))
 			{
-				query += $" WHERE LOWER(Name) LIKE LOWER({filter})";
+				query += $" WHERE LOWER(Name) LIKE LOWER(@Filter)";
 			}
 
 			if (!string.IsNullOrEmpty(sortBy))
@@ -61,11 +61,17 @@ namespace WebApplication1.Controllers
 				myCon.Open();
 				using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
 				{
+					if (!string.IsNullOrEmpty(filter))
+					{
+						myCommand.Parameters.AddWithValue("@Filter", $"%{filter}%");
+					}
+
 					myReader = myCommand.ExecuteReader();
 					table.Load(myReader);
 					myReader.Close();
 				}
 			}
+
 			return new JsonResult(table);
 		}
 
