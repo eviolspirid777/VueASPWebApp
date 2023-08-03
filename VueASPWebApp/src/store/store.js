@@ -1,4 +1,4 @@
-import DataClient from "./modules/dataApi";
+import DataClient from "../api/dataApi";
 import Vue from "vue";
 import Vuex from "vuex";
 
