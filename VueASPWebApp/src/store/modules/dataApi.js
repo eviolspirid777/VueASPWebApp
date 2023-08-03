@@ -4,16 +4,20 @@ const API_URL = "http://localhost:5000/api/department/";
 
 const DataClient = {
   async getAllData() {
-    return await axios.get(API_URL).then(response => response.data);
+    const response = await axios.get(API_URL);
+    return response.data;
   },
   async deleteStudent(ID) {
-    return axios.delete(API_URL + ID).then(response => response.data);
+    const response = await axios.delete(API_URL + ID);
+    return response.data;
   },
   async postStudent(studentData) {
-    return axios.post(API_URL, studentData).then(response => response.data);
+    const response = await axios.post(API_URL, studentData);
+    return response.data;
   },
   async updateStudentData(studentData) {
-    return axios.put(API_URL, studentData).then(response => response.data);
+    const response = axios.put(API_URL, studentData);
+    return response.data;
   }
 };
 
