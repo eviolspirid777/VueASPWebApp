@@ -35,11 +35,13 @@ export default new Vuex.Store({
       commit("addStudent", studentData);
       DataClient.postStudent(studentData);
     },
-    async fetchStudents({ commit }) {
+    async fetchStudents({ commit, state }) {
       const students = await DataClient.getAllData();
-      const studentsWithoutFilter = await DataClient.getAllData();
       commit("setStudents", students);
-      commit("setStudentsWithoutFilter", studentsWithoutFilter);
+      commit("setStudentsWithoutFilter", students);
+      if (state.studName !== "") {
+        commit("filterStudents", state.studName);
+      }
       return students;
     },
     async deleteStudent({ commit }, ID) {
@@ -51,28 +53,26 @@ export default new Vuex.Store({
       commit("fetchStudents");
       return;
     },
-    async sortStudents({ commit }, { prop, asc }) { //исправленная функция
-      let studentsTemp = await DataClient.getAllData();
+    async sortStudents({ commit, state }, { prop, asc }) {
+      commit("setSort", prop, asc);
+      const studentsTemp = state.studentsWithoutFilter;
       const stud = studentsTemp.sort(function(a, b) {
         if (asc) {
-          return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+          return a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0;
         }
         else {
-          return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+          return b[prop] < a[prop] ? -1 : b[prop] > a[prop] ? 1 : 0;
         }
       });
       commit("setStudents", stud);
     },
-    async filterStudents(ctx, nameFilt) {
-      ctx.commit("setFilt", nameFilt); //присваиваем и nameFilt
-      let StudentsWithoutFilter = await DataClient.getAllData();
-      let studs = StudentsWithoutFilter.filter(
-        function(el) {
-          return el.Name.toString().toLowerCase().includes(
-            nameFilt.toString().trim().toLowerCase()
-          );
-        });
-      ctx.commit("setStudents", studs);
+    async filterStudents({ commit, state }, nameFilt) {
+      commit("setFilt", nameFilt);
+      const studentsWithoutFilter = state.studentsWithoutFilter;
+      const studs = studentsWithoutFilter.filter(el =>
+        el.Name.toLowerCase().includes(nameFilt.trim().toLowerCase())
+      );
+      commit("setStudents", studs);
     }
   },
   getters: {

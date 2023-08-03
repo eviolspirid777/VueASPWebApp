@@ -22,46 +22,52 @@ namespace WebApplication1.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        public JsonResult Get()
-        {
+		[HttpGet]
+		public JsonResult Get(string sortBy = "", bool sortAsc = true, string filter = "")
+		{
 			string query = @"
-                        SELECT 
-                            ID AS ""ID"",
-                            ""Name"",
-                            ""Surname"",
-                            ""Patron"",
-                            ""Faculty"",
-                            ""Specialty"",
-                            ""Course"",
-                            ""Group"",
-                            ""City"",
-                            ""PostalCode"",
-                            ""Street"",
-                            ""Phone"",
-                            ""Email""
-                        FROM Students;
-                        ";
+        SELECT 
+            ID AS ""ID"",
+            ""Name"",
+            ""Surname"",
+            ""Patron"",
+            ""Faculty"",
+            ""Specialty"",
+            ""Course"",
+            ""Group"",
+            ""City"",
+            ""PostalCode"",
+            ""Street"",
+            ""Phone"",
+            ""Email""
+        FROM Students";
+
+			if (!string.IsNullOrEmpty(filter))
+			{
+				query += $" WHERE LOWER(Name) LIKE LOWER({filter})";
+			}
+
+			if (!string.IsNullOrEmpty(sortBy))
+			{
+				query += $" ORDER BY {sortBy} {(sortAsc ? "ASC" : "DESC")}";
+			}
 
 			DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            NpgsqlDataReader myReader;
-            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+			string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
+			NpgsqlDataReader myReader;
 
-                    myReader.Close();
-                    myCon.Close();
-
-                }
-            }
-
-            return new JsonResult(table);
-        }
+			using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
+			{
+				myCon.Open();
+				using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
+				{
+					myReader = myCommand.ExecuteReader();
+					table.Load(myReader);
+					myReader.Close();
+				}
+			}
+			return new JsonResult(table);
+		}
 
 
 		[HttpPost]
@@ -151,6 +157,7 @@ namespace WebApplication1.Controllers
 			DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             NpgsqlDataReader myReader;
+
             using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
             {
                 myCon.Open();
