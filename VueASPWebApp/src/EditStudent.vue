@@ -8,7 +8,7 @@
             <label for="name">Имя: </label>
             <input
               id="name"
-              v-model="formData.Name"
+              v-model="localFormData.Name"
               type="text"
               placeholder="Введите имя"
             >
@@ -17,7 +17,7 @@
             <label for="surname">Фамилия: </label>
             <input
               id="surname"
-              v-model="formData.Surname"
+              v-model="localFormData.Surname"
               type="text"
               placeholder="Введите фамилию"
             >
@@ -26,7 +26,7 @@
             <label for="patron">Отчество: </label>
             <input
               id="patron"
-              v-model="formData.Patron"
+              v-model="localFormData.Patron"
               type="text"
               placeholder="Введите отчество"
             >
@@ -35,7 +35,7 @@
             <label for="fac">Факультет: </label>
             <input
               id="fac"
-              v-model="formData.Faculty"
+              v-model="localFormData.Faculty"
               type="text"
               placeholder="Введите факультет"
             >
@@ -44,7 +44,7 @@
             <label for="specialty">Специальность: </label>
             <input
               id="specialty"
-              v-model="formData.Specialty"
+              v-model="localFormData.Specialty"
               type="text"
               placeholder="Введите специальность"
             >
@@ -53,7 +53,7 @@
             <label for="course">Курс: </label>
             <input
               id="course"
-              v-model="formData.Course"
+              v-model="localFormData.Course"
               type="text"
               placeholder="Введите курс"
             >
@@ -62,7 +62,7 @@
             <label for="group">Группа: </label>
             <input
               id="group"
-              v-model="formData.Group"
+              v-model="localFormData.Group"
               type="text"
               placeholder="Введите группу"
             >
@@ -71,7 +71,7 @@
             <label for="city">Город: </label>
             <input
               id="city"
-              v-model="formData.City"
+              v-model="localFormData.City"
               type="text"
               placeholder="Введите город"
             >
@@ -80,7 +80,7 @@
             <label for="postindx">Почтовый индекс: </label>
             <input
               id="postindx"
-              v-model="formData.PostalCode"
+              v-model="localFormData.PostalCode"
               type="text"
               placeholder="Введите почтовый индекс"
             >
@@ -89,7 +89,7 @@
             <label for="street">Улица: </label>
             <input
               id="street"
-              v-model="formData.Street"
+              v-model="localFormData.Street"
               type="text"
               placeholder="Введите улицу"
             >
@@ -98,7 +98,7 @@
             <label for="telephone">Телефон: </label>
             <input
               id="telephone"
-              v-model="formData.Phone"
+              v-model="localFormData.Phone"
               type="text"
               placeholder="Введите телефон"
             >
@@ -107,7 +107,7 @@
             <label for="post">Почта: </label>
             <input
               id="post"
-              v-model="formData.Email"
+              v-model="localFormData.Email"
               type="text"
               placeholder="Введите почту"
             >
@@ -137,12 +137,21 @@
 <script>
 export default {
   props: {
-    formData: {}
+    formData: {
+      type: Object //прописываем тип получаемого значения Object
+    }
   },
   data() {
     return {
-      localFormData: { ...this.formData }
+      localFormData: { ...this.formData } //!!! ОБЯЗАТЕЛЬНО ЛИ СОЗДАВАТЬ КОПИЮ МАССИВА В ЭТОМ БЛОКЕ, ЕСЛИ МЫ ИТАК СЛЕДИМ ЗА НИМ В WATCH И МЕНЯЕМ ПО МЕРЕ ИЗМЕНЕНИЯ?
     };
+  },
+  watch: {
+    formData: {
+      handler(newFormData) { //получает новые значения formData при любых изменениях
+        this.localFormData = { ...newFormData }; //присваивает их локальной переменной localFormData
+      }
+    }
   },
   methods: {
     updateClick() {
