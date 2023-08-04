@@ -139,11 +139,7 @@ export default {
   props: {
     formData: {}
   },
-  data() {
-    return {
-      localFormData: { ...this.formData }
-    };
-  },
+  data() {},
   methods: {
     updateClick() {
       this.$store.dispatch("updateStudent", this.formData)
