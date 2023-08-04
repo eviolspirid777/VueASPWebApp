@@ -135,6 +135,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   props: {
     formData: {
@@ -144,7 +146,7 @@ export default {
   },
   data() {
     return {
-      localFormData: { ...this.formData }
+      localFormData: _.cloneDeep(this.formData)
     };
   },
   watch: {
@@ -156,10 +158,8 @@ export default {
   },
   methods: {
     updateClick() {
-      this.$store.dispatch("updateStudent", this.localFormData)
-        .then(() => {
-          this.$store.dispatch("fetchStudents");
-        });
+      this.$store.dispatch("updateStudent", this.localFormData);
+      this.$store.dispatch("fetchStudents");
       this.$emit("close");
     },
     closeWindow() {
