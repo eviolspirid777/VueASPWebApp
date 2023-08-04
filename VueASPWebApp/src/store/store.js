@@ -45,9 +45,9 @@ export default new Vuex.Store({
       await DataClient.deleteStudent(ID);
       commit("fetchStudents");
     },
-    async updateStudent({ commit }, studentData) {
+    async updateStudent({ dispatch }, studentData) {
       DataClient.updateStudentData(studentData);
-      commit("fetchStudents");
+      dispatch("fetchStudents");
       return;
     },
     async sortStudents({ commit, state }, { prop, asc }) {
