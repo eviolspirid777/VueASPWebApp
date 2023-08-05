@@ -7,7 +7,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     students: [],
-    studentsWithoutFilter: [],
     studName: "",
     sortProperty: "",
     sortAsc: ""
@@ -18,9 +17,6 @@ export default new Vuex.Store({
     },
     setStudents(state, students) {
       state.students = students;
-    },
-    setStudentsWithoutFilter(state, studData) {
-      state.studentsWithoutFilter = studData;
     },
     setSort(state, { prop, asc }) {
       state.sortProperty = prop;
@@ -38,12 +34,11 @@ export default new Vuex.Store({
     async fetchStudents({ commit, state }) {
       const students = await DataClient.getAllData(state.studName, state.sortProperty, state.sortAsc || undefined);
       commit("setStudents", students);
-      commit("setStudentsWithoutFilter", students);
       return students;
     },
-    async deleteStudent({ commit }, ID) {
+    async deleteStudent({ dispatch }, ID) {
       await DataClient.deleteStudent(ID);
-      commit("fetchStudents");
+      dispatch("fetchStudents");
     },
     async updateStudent({ dispatch }, studentData) {
       DataClient.updateStudentData(studentData);

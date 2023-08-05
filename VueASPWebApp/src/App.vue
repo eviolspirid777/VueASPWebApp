@@ -38,15 +38,19 @@ import Home from "./Home.vue";
 import Student from "./Student.vue";
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 Vue.use(VueRouter);
+
 const routes = [
   { path: "/Home", component: Home },
   { path: "/Student", component: Student }
 ];
+
 const router = new VueRouter({
   mode: "history",
   routes: routes
 });
+
 export default {
   name: "App",
   router: router
@@ -54,5 +58,5 @@ export default {
 </script>
 
 <style>
- @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css');
+  @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css');
 </style>

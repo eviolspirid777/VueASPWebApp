@@ -28,15 +28,14 @@
             <div class="d-flex flex-row">
               <input
                 v-model="NameFilter"
-                class="form-control m-2"
+                class="form-control-m-2"
                 placeholder="Фильтр"
-                style="width:100px"
                 @input="FilterFn()"
               >
               <button
                 type="button"
                 class="btn btn-light"
-                @click="sortResult('ID',true)"
+                @click="sortResult('id',true)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +51,7 @@
               <button
                 type="button"
                 class="btn btn-light"
-                @click="sortResult('ID',false)"
+                @click="sortResult('id',false)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -85,28 +84,28 @@
       <tbody>
         <tr
           v-for="dep in getAllStudents"
-          :key="dep.ID"
+          :key="dep.id"
         >
-          <td>{{ dep.ID }}</td>
-          <td>{{ dep.Name }}</td>
-          <td>{{ dep.Surname }}</td>
-          <td>{{ dep.Patron }}</td>
-          <td>{{ dep.Faculty }}</td>
-          <td>{{ dep.Specialty }}</td>
-          <td>{{ dep.Course }}</td>
-          <td>{{ dep.Group }}</td>
-          <td>{{ dep.City }}</td>
-          <td>{{ dep.PostalCode }}</td>
-          <td>{{ dep.Street }}</td>
-          <td>{{ dep.Phone }}</td>
-          <td>{{ dep.Email }}</td>
+          <td>{{ dep.id }}</td>
+          <td>{{ dep.name }}</td>
+          <td>{{ dep.surname }}</td>
+          <td>{{ dep.patron }}</td>
+          <td>{{ dep.faculty }}</td>
+          <td>{{ dep.specialty }}</td>
+          <td>{{ dep.course }}</td>
+          <td>{{ dep.group }}</td>
+          <td>{{ dep.city }}</td>
+          <td>{{ dep.postalCode }}</td>
+          <td>{{ dep.street }}</td>
+          <td>{{ dep.phone }}</td>
+          <td>{{ dep.email }}</td>
           <td>
             <button
               type="button"
               class="btn btn-light mr-1"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="editClick(dep)"
+              @click="editStud(dep)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +125,7 @@
             <button
               type="button"
               class="btn btn-light mr-1"
-              @click="deleteClick(dep.ID)"
+              @click="deleteStud(dep.id)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -168,18 +167,18 @@ export default ({
       selectedStudent: {},
       payload: {
         ID: this.ID,
-        Name: this.Name,
-        Surname: this.Surname,
-        Patron: this.Patron,
-        Faculty: this.Faculty,
-        Specialty: this.Specialty,
-        Course: this.Course,
-        Group: this.Group,
-        City: this.City,
-        PostalCode: this.PostalCode,
-        Street: this.Street,
-        Phone: this.Phone,
-        Email: this.Email
+        name: this.name,
+        surname: this.surname,
+        patron: this.patron,
+        faculty: this.faculty,
+        specialty: this.specialty,
+        course: this.course,
+        group: this.group,
+        city: this.city,
+        postalCode: this.postalCode,
+        street: this.street,
+        phone: this.phone,
+        email: this.email
       }
     };
   },
@@ -195,24 +194,15 @@ export default ({
         this.$store.commit("setStudents", students);
       });
     },
-    addClick() {
-      this.$store.dispatch("addStudent", this.payload).then(response => {
-        this.refreshData();
-        alert(response.data);
-      });
-    },
-    editClick(dep) {
+    editStud(dep) {
       this.selectedStudent = dep;
       this.showModalEdit = true;
     },
-    deleteClick(ID) {
+    deleteStud(ID) {
       if (!confirm("Вы уверены?")) {
         return;
       }
-      this.$store.dispatch("deleteStudent", ID).then(response => {
-        this.refreshData();
-        alert(response.data);
-      });
+      this.$store.dispatch("deleteStudent", ID);
     },
     FilterFn() {
       this.$store.dispatch("filterStudents", this.NameFilter);
@@ -225,10 +215,16 @@ export default ({
 </script>
 
 <style>
+
+.form-control-m-2{
+  width:100px;
+}
+
 .modal-mask{
   border-style: groove;
   border-color: 15,83,252;
 }
+
 .btn-own-cls{
   border-radius: 4px;
   border-color: rgba(15, 83, 252);
@@ -237,9 +233,11 @@ export default ({
   height: 40px;
   background-color: white;
 }
+
 .btn-own-cls:hover {
   background-color: rgba(15, 83, 252, 1);
   cursor: pointer;
   color: white;
 }
+
 </style>
