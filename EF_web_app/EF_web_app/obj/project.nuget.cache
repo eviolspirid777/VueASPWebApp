@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ph/uQpQq+QhleIAVxvOGHkbnLz0jVpJSNiJsi9FD8Eyy0tLtf2Aewb5Q2CY7blJo7iqea0e9IhPrgI3C3ExGkg==",
+  "dgSpecHash": "9v36mQwdSXlS+jKrQKN6Ac/dk+Anyutb9He74xqjIDj27PVs6JadJFuMbJ4vXe9vqZisf8JoHhvJgtCuW760Cg==",
   "success": true,
-  "projectFilePath": "C:\\vueprj\\VueTest\\VueASPWebApp\\EF_web_app\\EF_web_app\\EF_web_app.csproj",
+  "projectFilePath": "C:\\VueEFWebApp\\VueASPWebApp\\EF_web_app\\EF_web_app\\EF_web_app.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\eviol\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\eviol\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",

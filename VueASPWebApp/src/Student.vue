@@ -189,9 +189,7 @@ export default ({
   },
   methods: {
     refreshData() {
-      this.$store.dispatch("fetchStudents").then(students => {
-        this.$store.commit("setStudents", students);
-      });
+      this.$store.dispatch("fetchStudents");
     },
     editStud(dep) {
       this.selectedStudent = dep;

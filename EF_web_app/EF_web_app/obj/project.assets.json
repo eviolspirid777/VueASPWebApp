@@ -8613,11 +8613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\vueprj\\VueTest\\VueASPWebApp\\EF_web_app\\EF_web_app\\EF_web_app.csproj",
+      "projectUniqueName": "C:\\VueEFWebApp\\VueASPWebApp\\EF_web_app\\EF_web_app\\EF_web_app.csproj",
       "projectName": "EF_web_app",
-      "projectPath": "C:\\vueprj\\VueTest\\VueASPWebApp\\EF_web_app\\EF_web_app\\EF_web_app.csproj",
+      "projectPath": "C:\\VueEFWebApp\\VueASPWebApp\\EF_web_app\\EF_web_app\\EF_web_app.csproj",
       "packagesPath": "C:\\Users\\eviol\\.nuget\\packages\\",
-      "outputPath": "C:\\vueprj\\VueTest\\VueASPWebApp\\EF_web_app\\EF_web_app\\obj\\",
+      "outputPath": "C:\\VueEFWebApp\\VueASPWebApp\\EF_web_app\\EF_web_app\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\eviol\\AppData\\Roaming\\NuGet\\NuGet.Config",
