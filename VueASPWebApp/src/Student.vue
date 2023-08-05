@@ -160,13 +160,12 @@ export default ({
   store,
   data() {
     return {
-      modalTitle: "",
       NameFilter: "", //фильтр по имени
       showModal: false, //буль для отображения окна добавления студента
       showModalEdit: false,
       selectedStudent: {},
       payload: {
-        ID: this.ID,
+        id: this.id,
         name: this.name,
         surname: this.surname,
         patron: this.patron,
