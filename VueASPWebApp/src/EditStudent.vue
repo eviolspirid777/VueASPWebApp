@@ -3,127 +3,153 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <h1>Редактирование студента</h1>
-          <p class="modal-body">
-            <label for="name">Имя: </label>
-            <input
-              id="name"
-              v-model="localFormData.name"
-              type="text"
-              placeholder="Введите имя"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="surname">Фамилия: </label>
-            <input
-              id="surname"
-              v-model="localFormData.surname"
-              type="text"
-              placeholder="Введите фамилию"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="patron">Отчество: </label>
-            <input
-              id="patron"
-              v-model="localFormData.patron"
-              type="text"
-              placeholder="Введите отчество"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="fac">Факультет: </label>
-            <input
-              id="fac"
-              v-model="localFormData.faculty"
-              type="text"
-              placeholder="Введите факультет"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="specialty">Специальность: </label>
-            <input
-              id="specialty"
-              v-model="localFormData.specialty"
-              type="text"
-              placeholder="Введите специальность"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="course">Курс: </label>
-            <input
-              id="course"
-              v-model="localFormData.course"
-              type="text"
-              placeholder="Введите курс"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="group">Группа: </label>
-            <input
-              id="group"
-              v-model="localFormData.group"
-              type="text"
-              placeholder="Введите группу"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="city">Город: </label>
-            <input
-              id="city"
-              v-model="localFormData.city"
-              type="text"
-              placeholder="Введите город"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="postindx">Почтовый индекс: </label>
-            <input
-              id="postindx"
-              v-model="localFormData.postalCode"
-              type="text"
-              placeholder="Введите почтовый индекс"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="street">Улица: </label>
-            <input
-              id="street"
-              v-model="localFormData.street"
-              type="text"
-              placeholder="Введите улицу"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="telephone">Телефон: </label>
-            <input
-              id="telephone"
-              v-model="localFormData.phone"
-              type="text"
-              placeholder="Введите телефон"
-            >
-          </p>
-          <p class="modal-body">
-            <label for="post">Почта: </label>
-            <input
-              id="post"
-              v-model="localFormData.email"
-              type="text"
-              placeholder="Введите почту"
-            >
-          </p>
+          <h1 style="font-size: large;">
+            Редактирование студента
+          </h1>
+          <table>
+            <tr>
+              <td><label for="name">Имя:</label></td>
+              <td>
+                <input
+                  id="name"
+                  v-model="localFormData.name"
+                  type="text"
+                  placeholder="Введите имя"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="surname">Фамилия:</label></td>
+              <td>
+                <input
+                  id="surname"
+                  v-model="localFormData.surname"
+                  type="text"
+                  placeholder="Введите фамилию"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="patron">Отчество:</label></td>
+              <td>
+                <input
+                  id="patron"
+                  v-model="localFormData.patron"
+                  type="text"
+                  placeholder="Введите отчество"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="fac">Факультет:</label></td>
+              <td>
+                <input
+                  id="fac"
+                  v-model="localFormData.faculty"
+                  type="text"
+                  placeholder="Введите факультет"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="specialty">Специальность:</label></td>
+              <td>
+                <input
+                  id="specialty"
+                  v-model="localFormData.specialty"
+                  type="text"
+                  placeholder="Введите специальность"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="course">Курс:</label></td>
+              <td>
+                <input
+                  id="course"
+                  v-model="localFormData.course"
+                  type="text"
+                  placeholder="Введите курс"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="group">Группа:</label></td>
+              <td>
+                <input
+                  id="group"
+                  v-model="localFormData.group"
+                  type="text"
+                  placeholder="Введите группу"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="city">Город:</label></td>
+              <td>
+                <input
+                  id="city"
+                  v-model="localFormData.city"
+                  type="text"
+                  placeholder="Введите город"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="postindx">Почтовый индекс:</label></td>
+              <td>
+                <input
+                  id="postindx"
+                  v-model="localFormData.postalCode"
+                  type="text"
+                  placeholder="Введите почтовый индекс"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="street">Улица:</label></td>
+              <td>
+                <input
+                  id="street"
+                  v-model="localFormData.street"
+                  type="text"
+                  placeholder="Введите улицу"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="telephone">Телефон:</label></td>
+              <td>
+                <input
+                  id="telephone"
+                  v-model="localFormData.phone"
+                  type="text"
+                  placeholder="Введите телефон"
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><label for="post">Почта:</label></td>
+              <td>
+                <input
+                  id="post"
+                  v-model="localFormData.email"
+                  type="text"
+                  placeholder="Введите почту"
+                >
+              </td>
+            </tr>
+          </table>
           <div class="modal-footer">
             <button
               class="btn-own-cls"
-              style="width: 200px;"
-              @click="closeWindow()"
+              @click="closeWindow"
             >
               Закрыть
             </button>
             <button
               class="btn-own-cls"
-              style="width: 200px;"
-              @click="updateClick()"
+              @click="updateClick"
             >
               OK
             </button>
@@ -133,6 +159,7 @@
     </div>
   </Transition>
 </template>
+
 
 <script>
 import _ from "lodash";
@@ -169,7 +196,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .modal-mask{
   border-style: groove;
@@ -183,6 +210,7 @@ export default {
   color: rgba(15, 83, 252);
   height: 40px;
   background-color: white;
+  width: 200px;
 }
 
 .btn-own-cls:hover {
