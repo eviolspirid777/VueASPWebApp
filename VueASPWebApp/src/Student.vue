@@ -188,8 +188,8 @@ export default ({
     this.refreshData();
   },
   methods: {
-    refreshData() {
-      this.$store.dispatch("fetchStudents");
+    async refreshData() {
+      await this.$store.dispatch("fetchStudents");
     },
     editStud(dep) {
       this.selectedStudent = dep;

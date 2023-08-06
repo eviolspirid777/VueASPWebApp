@@ -3,7 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <h1>Добавить Студента</h1>
+          <h1>Добавить Студента:</h1>
           <p class="modal-body">
             <label for="name">Имя: </label>
             <input
@@ -135,10 +135,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       formData: {
+        id: null,
         Name: "",
         Surname: "",
         Patron: "",
@@ -154,6 +157,12 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapGetters(["getAllStudents"]),
+    totalStudents() {
+      return this.getAllStudents.length;
+    }
+  },
   methods: {
     addClick() {
       for (const key in this.formData) {
@@ -162,6 +171,7 @@ export default {
           return;
         }
       }
+      this.formData.id = this.totalStudents + 1;
       this.$store.dispatch("addStudent", this.formData);
       this.closeWindow();
     },
