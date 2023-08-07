@@ -149,7 +149,7 @@
             </button>
             <button
               class="btn-own-cls"
-              @click="addClick()"
+              @click="addStudent()"
             >
               OK
             </button>
@@ -190,7 +190,7 @@ export default {
     }
   },
   methods: {
-    addClick() {
+    addStudent() {
       for (const key in this.formData) {
         if (this.formData[key] === "") {
           alert(`Пожалуйста заполните ${key} поле!`);

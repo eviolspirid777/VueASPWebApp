@@ -30,7 +30,7 @@
                 v-model="NameFilter"
                 class="form-control-m-2"
                 placeholder="Фильтр"
-                @input="FilterFn()"
+                @input="FilterFunction()"
               >
               <button
                 type="button"
@@ -105,7 +105,7 @@
               class="btn btn-light mr-1"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="editStud(dep)"
+              @click="editStudent(dep)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@
             <button
               type="button"
               class="btn btn-light mr-1"
-              @click="deleteStud(dep.id)"
+              @click="deleteStudent(dep.id)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -191,17 +191,17 @@ export default ({
     async refreshData() {
       await this.$store.dispatch("fetchStudents");
     },
-    editStud(dep) {
+    editStudent(dep) {
       this.selectedStudent = dep;
       this.showModalEdit = true;
     },
-    deleteStud(ID) {
+    deleteStudent(ID) {
       if (!confirm("Вы уверены?")) {
         return;
       }
       this.$store.dispatch("deleteStudent", ID);
     },
-    FilterFn() {
+    FilterFunction() {
       this.$store.dispatch("filterStudents", this.NameFilter);
     },
     sortResult(prop, asc) {

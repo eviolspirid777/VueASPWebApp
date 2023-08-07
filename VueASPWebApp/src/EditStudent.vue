@@ -143,13 +143,13 @@
           <div class="modal-footer">
             <button
               class="btn-own-cls"
-              @click="closeWindow"
+              @click="closeWindow()"
             >
               Закрыть
             </button>
             <button
               class="btn-own-cls"
-              @click="updateClick"
+              @click="updateStudent()"
             >
               OK
             </button>
@@ -184,7 +184,7 @@ export default {
     }
   },
   methods: {
-    updateClick() {
+    updateStudent() {
       this.$store.dispatch("updateStudent", this.localFormData);
       this.$store.dispatch("fetchStudents");
       this.$emit("close");

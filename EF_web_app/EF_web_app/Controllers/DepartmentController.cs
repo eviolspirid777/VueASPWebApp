@@ -12,9 +12,12 @@ namespace EF_web_app.Controllers
 	public class DepartmentController : ControllerBase
 	{
 		private readonly ApplicationDbContext _context;
+
+		static bool flag = true;																		//буль для хранения состояния
 		public DepartmentController(ApplicationDbContext context)
 		{
 			_context = context;
+			_context.Database.EnsureCreated();										//устанавливает связи в БД
 		}
 
 		[HttpGet]
