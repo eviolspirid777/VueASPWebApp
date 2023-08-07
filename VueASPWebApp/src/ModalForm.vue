@@ -3,9 +3,10 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <h1 style="font-size: large;">
+          <h1 style="font-size: 30px; padding-left: 40px;">
             Добавить Студента
           </h1>
+          <hr>
           <table>
             <tr>
               <td><label for="name">Имя:</label></td>
@@ -272,5 +273,21 @@ h1{
   display: flex;
   align-items: center;
   margin: 40px;
+}
+
+td{
+  width: 200px;
+}
+
+label{
+  font-size: 20px;
+}
+
+input{
+  font-size: 20px;
+}
+
+table{
+  margin: auto;
 }
 </style>

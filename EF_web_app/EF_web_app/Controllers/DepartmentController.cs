@@ -21,7 +21,7 @@ namespace EF_web_app.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Get(string? sortBy, bool sortAsc = true, string? filter= null)
+		public async Task<IActionResult> Get(string? sortBy, string? sortBy2, string? sortBy3, bool sortAsc = true, string? filter= null)
 		{
 			IQueryable<Student> students = _context.Students;
 
@@ -34,11 +34,11 @@ namespace EF_web_app.Controllers
 			{
 				if (sortAsc)
 				{
-					students = students.OrderBy(s => EF.Property<object>(s, sortBy));
+					students = students.OrderBy(s => EF.Property<object>(s, sortBy)).ThenBy(d => EF.Property<object>(d,sortBy2)).ThenBy(f => EF.Property<object>(f, sortBy3));
 				}
 				else
 				{
-					students = students.OrderByDescending(s => EF.Property<object>(s, sortBy));
+					students = students.OrderByDescending(s => EF.Property<object>(s, sortBy)).ThenByDescending(d => EF.Property<object>(d, sortBy2)).ThenByDescending(f => EF.Property<object>(f, sortBy3));
 				}
 			}
 

@@ -3,10 +3,11 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <h1 style="font-size: large;">
+          <h1 style="font-size: 30px;">
             Редактирование студента
           </h1>
-          <table>
+          <hr>
+          <table style="margin: auto;">
             <tr>
               <td><label for="name">Имя:</label></td>
               <td>
@@ -14,7 +15,6 @@
                   id="name"
                   v-model="localFormData.name"
                   type="text"
-                  placeholder="Введите имя"
                 >
               </td>
             </tr>
@@ -25,7 +25,6 @@
                   id="surname"
                   v-model="localFormData.surname"
                   type="text"
-                  placeholder="Введите фамилию"
                 >
               </td>
             </tr>
@@ -36,7 +35,6 @@
                   id="patron"
                   v-model="localFormData.patron"
                   type="text"
-                  placeholder="Введите отчество"
                 >
               </td>
             </tr>
@@ -47,7 +45,6 @@
                   id="fac"
                   v-model="localFormData.faculty"
                   type="text"
-                  placeholder="Введите факультет"
                 >
               </td>
             </tr>
@@ -58,7 +55,6 @@
                   id="specialty"
                   v-model="localFormData.specialty"
                   type="text"
-                  placeholder="Введите специальность"
                 >
               </td>
             </tr>
@@ -69,7 +65,6 @@
                   id="course"
                   v-model="localFormData.course"
                   type="text"
-                  placeholder="Введите курс"
                 >
               </td>
             </tr>
@@ -80,7 +75,6 @@
                   id="group"
                   v-model="localFormData.group"
                   type="text"
-                  placeholder="Введите группу"
                 >
               </td>
             </tr>
@@ -91,7 +85,6 @@
                   id="city"
                   v-model="localFormData.city"
                   type="text"
-                  placeholder="Введите город"
                 >
               </td>
             </tr>
@@ -102,7 +95,6 @@
                   id="postindx"
                   v-model="localFormData.postalCode"
                   type="text"
-                  placeholder="Введите почтовый индекс"
                 >
               </td>
             </tr>
@@ -113,7 +105,6 @@
                   id="street"
                   v-model="localFormData.street"
                   type="text"
-                  placeholder="Введите улицу"
                 >
               </td>
             </tr>
@@ -124,7 +115,6 @@
                   id="telephone"
                   v-model="localFormData.phone"
                   type="text"
-                  placeholder="Введите телефон"
                 >
               </td>
             </tr>
@@ -135,11 +125,11 @@
                   id="post"
                   v-model="localFormData.email"
                   type="text"
-                  placeholder="Введите почту"
                 >
               </td>
             </tr>
           </table>
+          <br>
           <div class="modal-footer">
             <button
               class="btn-own-cls"
@@ -264,6 +254,18 @@ h1{
   display: flex;
   align-items: center;
   margin: 40px;
+}
+
+td{
+  width: 200px;
+}
+
+label{
+  font-size: 20px;
+}
+
+input{
+  font-size: 20px;
 }
 
 </style>

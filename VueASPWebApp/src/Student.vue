@@ -35,7 +35,7 @@
               <button
                 type="button"
                 class="btn btn-light"
-                @click="sortResult('id',true)"
+                @click="sortResult('Name', 'Surname', 'Patron', true)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@
               <button
                 type="button"
                 class="btn btn-light"
-                @click="sortResult('id',false)"
+                @click="sortResult('Name', 'Surname', 'Patron',false)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -184,8 +184,8 @@ export default ({
   computed: {
     ...mapGetters(["getAllStudents"])
   },
-  mounted: function() {
-    this.refreshData();
+  mounted: async function() {
+    await this.refreshData();
   },
   methods: {
     async refreshData() {
@@ -204,8 +204,8 @@ export default ({
     FilterFunction() {
       this.$store.dispatch("filterStudents", this.NameFilter);
     },
-    sortResult(prop, asc) {
-      this.$store.dispatch("sortStudents", { prop, asc });
+    sortResult(prop, prop2, prop3, asc) {
+      this.$store.dispatch("sortStudents", { prop, prop2, prop3, asc });
     }
   }
 });
