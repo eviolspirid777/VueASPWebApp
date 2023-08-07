@@ -14,3 +14,13 @@ node_modules/
 # Игнорировать файлы логов и временные файлы
 logs/
 tmp/
+
+../EF_web_app/EF_web_app/obj/
+obj/
+/**/obj/**/*
+/./**/obj/**/*
+./**/obj/**/*
+**/obj/**/*
+*/obj/**/*
+obj/**/*
+/**/obj/*
