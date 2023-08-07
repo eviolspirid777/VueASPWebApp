@@ -15,7 +15,6 @@
                   id="name"
                   v-model="formData.Name"
                   type="text"
-                  placeholder="Введите имя"
                 >
               </td>
             </tr>
@@ -26,7 +25,6 @@
                   id="surname"
                   v-model="formData.Surname"
                   type="text"
-                  placeholder="Введите фамилию"
                 >
               </td>
             </tr>
@@ -37,7 +35,6 @@
                   id="patron"
                   v-model="formData.Patron"
                   type="text"
-                  placeholder="Введите отчество"
                 >
               </td>
             </tr>
@@ -48,7 +45,6 @@
                   id="fac"
                   v-model="formData.Faculty"
                   type="text"
-                  placeholder="Введите факультет"
                 >
               </td>
             </tr>
@@ -59,7 +55,6 @@
                   id="specialty"
                   v-model="formData.Specialty"
                   type="text"
-                  placeholder="Введите специальность"
                 >
               </td>
             </tr>
@@ -70,7 +65,6 @@
                   id="course"
                   v-model="formData.Course"
                   type="text"
-                  placeholder="Введите курс"
                 >
               </td>
             </tr>
@@ -81,7 +75,6 @@
                   id="group"
                   v-model="formData.Group"
                   type="text"
-                  placeholder="Введите группу"
                 >
               </td>
             </tr>
@@ -92,7 +85,6 @@
                   id="city"
                   v-model="formData.City"
                   type="text"
-                  placeholder="Введите город"
                 >
               </td>
             </tr>
@@ -103,7 +95,6 @@
                   id="postindx"
                   v-model="formData.PostalCode"
                   type="text"
-                  placeholder="Введите почтовый индекс"
                 >
               </td>
             </tr>
@@ -114,7 +105,6 @@
                   id="street"
                   v-model="formData.Street"
                   type="text"
-                  placeholder="Введите улицу"
                 >
               </td>
             </tr>
@@ -125,7 +115,6 @@
                   id="telephone"
                   v-model="formData.Phone"
                   type="text"
-                  placeholder="Введите телефон"
                 >
               </td>
             </tr>
@@ -136,7 +125,6 @@
                   id="post"
                   v-model="formData.Email"
                   type="text"
-                  placeholder="Введите почту"
                 >
               </td>
             </tr>
