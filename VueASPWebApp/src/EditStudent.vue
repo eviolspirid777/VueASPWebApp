@@ -7,7 +7,7 @@
             Редактирование студента
           </h1>
           <hr>
-          <table style="margin: auto;">
+          <table>
             <tr>
               <td><label for="name">Имя:</label></td>
               <td>
@@ -266,6 +266,10 @@ label{
 
 input{
   font-size: 20px;
+}
+
+table{
+  margin: auto;
 }
 
 </style>
