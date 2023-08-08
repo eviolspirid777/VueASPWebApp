@@ -149,10 +149,8 @@
 import EditStud from "./EditStudent.vue";
 import ModalForm from "./ModalForm.vue";
 import store from "./store/store";
-import { mapGetters } from "vuex";
 
 export default ({
-  new: "#stud",
   components: {
     ModalForm,
     EditStud
@@ -182,7 +180,9 @@ export default ({
     };
   },
   computed: {
-    ...mapGetters(["getAllStudents"])
+    getAllStudents() {
+      return this.$store.getters.getAllStudents;
+    }
   },
   mounted: async function() {
     await this.refreshData();
@@ -204,8 +204,8 @@ export default ({
     FilterFunction() {
       this.$store.dispatch("filterStudents", this.NameFilter);
     },
-    sortResult(prop, prop2, prop3, asc) {
-      this.$store.dispatch("sortStudents", { prop, prop2, prop3, asc });
+    sortResult(name, surname, patron, asc) {
+      this.$store.dispatch("sortStudents", { name, surname, patron, asc });
     }
   }
 });

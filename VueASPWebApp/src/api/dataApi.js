@@ -3,14 +3,14 @@ import axios from "axios";
 const API_URL = "http://localhost:5000/api/department/";
 
 const DataClient = {
-  async getAllData(filter = "", sortBy = "", sortBy2 = "", sortBy3 = "", sortAsc = true) {
+  async getAllData(filter = "", sortByName = "", sortBySurname = "", sortByPatron = "", sortAsc = true) {
     const response = await axios.get(API_URL, {
       params: {
-        filter,
-        sortBy,
-        sortBy2,
-        sortBy3,
-        sortAsc
+        sortByName,
+        sortBySurname,
+        sortByPatron,
+        sortAsc,
+        filter
       }
     });
     return response.data;
