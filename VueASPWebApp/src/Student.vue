@@ -161,22 +161,7 @@ export default ({
       NameFilter: "", //фильтр по имени
       showModal: false, //буль для отображения окна добавления студента
       showModalEdit: false,
-      selectedStudent: {},
-      payload: {
-        id: this.id,
-        name: this.name,
-        surname: this.surname,
-        patron: this.patron,
-        faculty: this.faculty,
-        specialty: this.specialty,
-        course: this.course,
-        group: this.group,
-        city: this.city,
-        postalCode: this.postalCode,
-        street: this.street,
-        phone: this.phone,
-        email: this.email
-      }
+      selectedStudent: {}
     };
   },
   computed: {
