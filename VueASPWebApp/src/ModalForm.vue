@@ -13,7 +13,7 @@
               <td>
                 <input
                   id="name"
-                  v-model="formData.Name"
+                  v-model="formData.name"
                   type="text"
                 >
               </td>
@@ -23,7 +23,7 @@
               <td>
                 <input
                   id="surname"
-                  v-model="formData.Surname"
+                  v-model="formData.surname"
                   type="text"
                 >
               </td>
@@ -33,7 +33,7 @@
               <td>
                 <input
                   id="patron"
-                  v-model="formData.Patron"
+                  v-model="formData.patron"
                   type="text"
                 >
               </td>
@@ -43,7 +43,7 @@
               <td>
                 <input
                   id="fac"
-                  v-model="formData.Faculty"
+                  v-model="formData.faculty"
                   type="text"
                 >
               </td>
@@ -53,7 +53,7 @@
               <td>
                 <input
                   id="specialty"
-                  v-model="formData.Specialty"
+                  v-model="formData.specialty"
                   type="text"
                 >
               </td>
@@ -63,7 +63,7 @@
               <td>
                 <input
                   id="course"
-                  v-model="formData.Course"
+                  v-model="formData.course"
                   type="text"
                 >
               </td>
@@ -73,7 +73,7 @@
               <td>
                 <input
                   id="group"
-                  v-model="formData.Group"
+                  v-model="formData.group"
                   type="text"
                 >
               </td>
@@ -83,7 +83,7 @@
               <td>
                 <input
                   id="city"
-                  v-model="formData.City"
+                  v-model="formData.city"
                   type="text"
                 >
               </td>
@@ -93,7 +93,7 @@
               <td>
                 <input
                   id="postindx"
-                  v-model="formData.PostalCode"
+                  v-model="formData.postalCode"
                   type="text"
                 >
               </td>
@@ -103,7 +103,7 @@
               <td>
                 <input
                   id="street"
-                  v-model="formData.Street"
+                  v-model="formData.street"
                   type="text"
                 >
               </td>
@@ -113,7 +113,7 @@
               <td>
                 <input
                   id="telephone"
-                  v-model="formData.Phone"
+                  v-model="formData.phone"
                   type="text"
                 >
               </td>
@@ -123,7 +123,7 @@
               <td>
                 <input
                   id="post"
-                  v-model="formData.Email"
+                  v-model="formData.email"
                   type="text"
                 >
               </td>
@@ -157,18 +157,18 @@ export default {
     return {
       formData: {
         id: null,
-        Name: "",
-        Surname: "",
-        Patron: "",
-        Faculty: "",
-        Specialty: "",
-        Course: "",
-        Group: "",
-        City: "",
-        PostalCode: "",
-        Street: "",
-        Phone: "",
-        Email: ""
+        name: "",
+        surname: "",
+        patron: "",
+        faculty: "",
+        specialty: "",
+        course: "",
+        group: "",
+        city: "",
+        postalCode: "",
+        street: "",
+        phone: "",
+        email: ""
       }
     };
   },
