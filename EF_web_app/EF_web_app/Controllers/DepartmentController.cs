@@ -21,7 +21,7 @@ namespace EF_web_app.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Get(string ? sortByName, string? sortBySurname, string? sortByPatron, bool sortAsc = true, string? filter = null)
+		public async Task<IActionResult> Get(string ? sortByName, bool sortAsc = true, string? filter = null)
 		{
 			IQueryable<Student> students = _context.Students;
 
@@ -34,11 +34,11 @@ namespace EF_web_app.Controllers
 			{
 				if (sortAsc)
 				{
-					students = students.OrderBy(s => EF.Property<object>(s, sortByName)).ThenBy(d => EF.Property<object>(d,sortBySurname)).ThenBy(f => EF.Property<object>(f, sortByPatron));
+					students = students.OrderBy(s => EF.Property<object>(s, "Name")).ThenBy(d => EF.Property<object>(d, "Surname")).ThenBy(f => EF.Property<object>(f, "Patron")).ThenBy(f => EF.Property<object>(f, "Faculty")).ThenBy(f => EF.Property<object>(f, "Specialty")).ThenBy(f => EF.Property<object>(f, "Course")).ThenBy(f => EF.Property<object>(f, "Group")).ThenBy(f => EF.Property<object>(f, "City")).ThenBy(f => EF.Property<object>(f, "PostalCode")).ThenBy(f => EF.Property<object>(f, "Street")).ThenBy(f => EF.Property<object>(f, "Phone")).ThenBy(f => EF.Property<object>(f, "Email"));
 				}
 				else
 				{
-					students = students.OrderByDescending(s => EF.Property<object>(s, sortByName)).ThenByDescending(d => EF.Property<object>(d, sortBySurname)).ThenByDescending(f => EF.Property<object>(f, sortByPatron));
+					students = students.OrderByDescending(s => EF.Property<object>(s, "Name")).ThenByDescending(d => EF.Property<object>(d, "Surname")).ThenByDescending(f => EF.Property<object>(f, "Patron")).ThenByDescending(f => EF.Property<object>(f, "Faculty")).ThenByDescending(f => EF.Property<object>(f, "Specialty")).ThenByDescending(f => EF.Property<object>(f, "Course")).ThenByDescending(f => EF.Property<object>(f, "Group")).ThenByDescending(f => EF.Property<object>(f, "City")).ThenByDescending(f => EF.Property<object>(f, "PostalCode")).ThenByDescending(f => EF.Property<object>(f, "Street")).ThenByDescending(f => EF.Property<object>(f, "Phone")).ThenByDescending(f => EF.Property<object>(f, "Email"));
 				}
 			}
 

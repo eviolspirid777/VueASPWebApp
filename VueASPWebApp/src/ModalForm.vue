@@ -3,8 +3,8 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <h1 style="font-size: 30px; padding-left: 40px;">
-            Добавить Студента
+          <h1 style="font-size: 30px;">
+            {{ modalTitle }}
           </h1>
           <hr>
           <table>
@@ -132,13 +132,13 @@
           <div class="modal-footer">
             <button
               class="btn-own-cls"
-              @click="closeWindow"
+              @click="closeWindow()"
             >
               Закрыть
             </button>
             <button
               class="btn-own-cls"
-              @click="addStudent()"
+              @click="submitStudent()"
             >
               OK
             </button>
@@ -153,22 +153,28 @@
 import { mapGetters } from "vuex";
 
 export default {
+  props: {
+    sendData: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {
       formData: {
-        id: null,
-        name: "",
-        surname: "",
-        patron: "",
-        faculty: "",
-        specialty: "",
-        course: "",
-        group: "",
-        city: "",
-        postalCode: "",
-        street: "",
-        phone: "",
-        email: ""
+        id: this.sendData.id ?? undefined,
+        name: this.sendData.name ?? "",
+        surname: this.sendData.surname ?? "",
+        patron: this.sendData.patron ?? "",
+        faculty: this.sendData.faculty ?? "",
+        specialty: this.sendData.specialty ?? "",
+        course: this.sendData.course ?? "",
+        group: this.sendData.group ?? "",
+        city: this.sendData.city ?? "",
+        postalCode: this.sendData.postalCode ?? "",
+        street: this.sendData.street ?? "",
+        phone: this.sendData.phone ?? "",
+        email: this.sendData.email ?? ""
       }
     };
   },
@@ -176,19 +182,29 @@ export default {
     ...mapGetters(["getAllStudents"]),
     totalStudents() {
       return this.getAllStudents.length;
+    },
+    modalTitle() {
+      return Object.keys(this.sendData).length !== 0 ? "Редактировать Студента" : "Добавить Студента";
     }
   },
   methods: {
-    addStudent() {
+    submitStudent() {
       for (const key in this.formData) {
         if (this.formData[key] === "") {
           alert(`Пожалуйста заполните ${key} поле!`);
           return;
         }
       }
-      this.formData.id = this.totalStudents + 1;
-      this.$store.dispatch("addStudent", this.formData);
-      this.closeWindow();
+      if (Object.keys(this.sendData).length === 0) {
+        // this.formData.id = this.totalStudents + 1;
+        this.$store.dispatch("addStudent", this.formData);
+        this.closeWindow();
+      }
+      else {
+        this.$store.dispatch("updateStudent", this.formData);
+        this.$store.dispatch("fetchStudents");
+        this.closeWindow();
+      }
     },
     closeWindow() {
       this.$emit("close");
@@ -256,6 +272,7 @@ export default {
 
 h1{
   color: rgba(15, 83, 252, 1);
+  align-items: stretch;
   font-size: 10px;
   position: relative;
   display: flex;

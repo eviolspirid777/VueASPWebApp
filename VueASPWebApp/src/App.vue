@@ -9,27 +9,7 @@
     <h5 class="d-flex justify-content-center">
       Управление студентами
     </h5>
-    <nav class="navbar navbar-expand-sm bg-light navbar-dark">
-      <ul class="navbar-nav">
-        <li class="nav-item m-1">
-          <RouterLink
-            class="btn btn-light btn-outline-primary"
-            to="/Home"
-          >
-            Домой
-          </RouterLink>
-        </li>
-        <li class="nav-item m-1">
-          <RouterLink
-            class="btn btn-light btn-outline-primary"
-            to="/Student"
-          >
-            Студенты
-          </RouterLink>
-        </li>
-      </ul>
-    </nav>
-    <RouterView />
+    <Student />
   </div>
 </template>
 
@@ -53,6 +33,9 @@ const router = new VueRouter({
 
 export default {
   name: "App",
+  components: {
+    Student
+  },
   router: router
 };
 </script>

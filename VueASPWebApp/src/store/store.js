@@ -9,8 +9,6 @@ export default new Vuex.Store({
     students: [],
     studName: "",
     sortName: "",
-    sortSurname: "",
-    sortPatron: "",
     sortAsc: ""
   },
   mutations: {
@@ -20,13 +18,11 @@ export default new Vuex.Store({
     setStudents(state, students) {
       state.students = students;
     },
-    setSort(state, { name, surname, patron, asc }) {
+    setSort(state, { name, asc }) {
       state.sortName = name;
-      state.sortSurname = surname;
-      state.sortPatron = patron;
       state.sortAsc = asc;
     },
-    setFilt(state, studName) {
+    setFiltration(state, studName) {
       state.studName = studName;
     }
   },
@@ -49,17 +45,15 @@ export default new Vuex.Store({
       dispatch("fetchStudents");
       return;
     },
-    async sortStudents({ commit, state }, { name, surname, patron, asc }) {
-      commit("setSort", { name, surname, patron, asc });
+    async sortStudents({ commit, state }, { name, asc }) {
+      commit("setSort", { name, asc });
       const sortByName = state.sortName;
-      const sortBySurname = state.sortSurname;
-      const sortByPatron = state.sortPatron;
       const sortAsc = state.sortAsc;
-      const students = await DataClient.getAllData("", sortByName, sortBySurname, sortByPatron, sortAsc);
+      const students = await DataClient.getAllData("", sortByName, sortAsc);
       commit("setStudents", students);
     },
     async filterStudents({ commit, state }, nameFilt) {
-      commit("setFilt", nameFilt);
+      commit("setFiltration", nameFilt);
       const filter = state.studName;
       const sortBy = state.sortProperty;
       const sortAsc = state.sortAsc;
