@@ -7,6 +7,7 @@ namespace EF_web_app
 	public class Student
 	{
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int id { get; set; }
 		public string Name { get; set; }
 		public string Surname { get; set; }

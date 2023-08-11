@@ -7,128 +7,78 @@
             {{ modalTitle }}
           </h1>
           <hr>
-          <table>
-            <tr>
-              <td><label for="name">Имя:</label></td>
-              <td>
-                <input
-                  id="name"
-                  v-model="formData.name"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="surname">Фамилия:</label></td>
-              <td>
-                <input
-                  id="surname"
-                  v-model="formData.surname"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="patron">Отчество:</label></td>
-              <td>
-                <input
-                  id="patron"
-                  v-model="formData.patron"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="fac">Факультет:</label></td>
-              <td>
-                <input
-                  id="fac"
-                  v-model="formData.faculty"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="specialty">Специальность:</label></td>
-              <td>
-                <input
-                  id="specialty"
-                  v-model="formData.specialty"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="course">Курс:</label></td>
-              <td>
-                <input
-                  id="course"
-                  v-model="formData.course"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="group">Группа:</label></td>
-              <td>
-                <input
-                  id="group"
-                  v-model="formData.group"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="city">Город:</label></td>
-              <td>
-                <input
-                  id="city"
-                  v-model="formData.city"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="postindx">Почтовый индекс:</label></td>
-              <td>
-                <input
-                  id="postindx"
-                  v-model="formData.postalCode"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="street">Улица:</label></td>
-              <td>
-                <input
-                  id="street"
-                  v-model="formData.street"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="telephone">Телефон:</label></td>
-              <td>
-                <input
-                  id="telephone"
-                  v-model="formData.phone"
-                  type="text"
-                >
-              </td>
-            </tr>
-            <tr>
-              <td><label for="post">Почта:</label></td>
-              <td>
-                <input
-                  id="post"
-                  v-model="formData.email"
-                  type="text"
-                >
-              </td>
-            </tr>
-          </table>
+          <label for="name">Имя:</label>
+          <input
+            id="name"
+            v-model="formData.name"
+            type="text"
+          >
+          <label for="surname">Фамилия:</label>
+          <input
+            id="surname"
+            v-model="formData.surname"
+            type="text"
+          >
+          <label for="patron">Отчество:</label>
+          <input
+            id="patron"
+            v-model="formData.patron"
+            type="text"
+          >
+          <label for="fac">Факультет:</label>
+          <input
+            id="fac"
+            v-model="formData.faculty"
+            type="text"
+          >
+          <label for="specialty">Специальность:</label>
+          <input
+            id="specialty"
+            v-model="formData.specialty"
+            type="text"
+          >
+          <label for="course">Курс:</label>
+          <input
+            id="course"
+            v-model="formData.course"
+            type="text"
+          >
+          <label for="group">Группа:</label>
+          <input
+            id="group"
+            v-model="formData.group"
+            type="text"
+          >
+          <label for="city">Город:</label>
+          <input
+            id="city"
+            v-model="formData.city"
+            type="text"
+          >
+          <label for="postindx">Почтовый индекс:</label>
+          <input
+            id="postindx"
+            v-model="formData.postalCode"
+            type="text"
+          >
+          <label for="street">Улица:</label>
+          <input
+            id="street"
+            v-model="formData.street"
+            type="text"
+          >
+          <label for="telephone">Телефон:</label>
+          <input
+            id="telephone"
+            v-model="formData.phone"
+            type="text"
+          >
+          <label for="post">Почта:</label>
+          <input
+            id="post"
+            v-model="formData.email"
+            type="text"
+          >
           <div class="modal-footer">
             <button
               class="btn-own-cls"
@@ -162,7 +112,6 @@ export default {
   data() {
     return {
       formData: {
-        id: this.sendData.id ?? undefined,
         name: this.sendData.name ?? "",
         surname: this.sendData.surname ?? "",
         patron: this.sendData.patron ?? "",
@@ -195,8 +144,8 @@ export default {
           return;
         }
       }
+
       if (Object.keys(this.sendData).length === 0) {
-        // this.formData.id = this.totalStudents + 1;
         this.$store.dispatch("addStudent", this.formData);
         this.closeWindow();
       }
@@ -214,25 +163,6 @@ export default {
 </script>
 
 <style scoped>
-.modal-mask{
-  border-style: groove;
-  border-color: 15,83,252;
-}
-.btn-own-cls{
-  border-radius: 4px;
-  border-color: rgba(15, 83, 252);
-  transition: background-color 0.3s ease;
-  color: rgba(15, 83, 252);
-  height: 40px;
-  background-color: white;
-  width: 200px;
-}
-.btn-own-cls:hover {
-  background-color: rgba(15, 83, 252, 1);
-  cursor: pointer;
-  color: white;
-}
-/* Модальное окно*/
 .modal-mask {
   position: fixed;
   top: 0;
@@ -252,8 +182,9 @@ export default {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
-.modal-body {
-  padding: 10px;
+.modal-container {
+  padding: 20px;
+  text-align: left;
 }
 
 .modal-footer {
@@ -262,37 +193,52 @@ export default {
   padding: 10px;
 }
 
-.modal-enter-active, .modal-leave-active {
+.modal-enter-active,
+.modal-leave-active {
   transition: opacity 0.3s ease;
 }
 
-.modal-enter, .modal-leave-to{
+.modal-enter,
+.modal-leave-to {
   opacity: 0;
 }
 
-h1{
+h1 {
   color: rgba(15, 83, 252, 1);
-  align-items: stretch;
-  font-size: 10px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin: 40px;
+  font-size: 20px;
+  margin: 20px 0;
 }
 
-td{
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+input {
   width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
-label{
-  font-size: 20px;
+.btn-own-cls {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
-input{
-  font-size: 20px;
+.btn-own-cls:not(:last-child) {
+  margin-right: 10px;
 }
 
-table{
-  margin: auto;
-}
 </style>

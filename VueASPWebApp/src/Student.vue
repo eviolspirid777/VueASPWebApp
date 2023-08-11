@@ -37,7 +37,6 @@ export default ({
   data() {
     return {
       showModal: false, //буль для отображения окна добавления студента
-      showModalEdit: false,
       selectedStudent: {}
     };
   },

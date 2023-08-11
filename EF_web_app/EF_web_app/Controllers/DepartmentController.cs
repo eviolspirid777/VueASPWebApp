@@ -17,7 +17,7 @@ namespace EF_web_app.Controllers
 		public DepartmentController(ApplicationDbContext context)
 		{
 			_context = context;
-			_context.Database.EnsureCreated();										//устанавливает связи в БД
+			_context.Database.EnsureCreated();                                      //устанавливает связи в БД
 		}
 
 		[HttpGet]
@@ -34,11 +34,11 @@ namespace EF_web_app.Controllers
 			{
 				if (sortAsc)
 				{
-					students = students.OrderBy(s => EF.Property<object>(s, "Name")).ThenBy(d => EF.Property<object>(d, "Surname")).ThenBy(f => EF.Property<object>(f, "Patron")).ThenBy(f => EF.Property<object>(f, "Faculty")).ThenBy(f => EF.Property<object>(f, "Specialty")).ThenBy(f => EF.Property<object>(f, "Course")).ThenBy(f => EF.Property<object>(f, "Group")).ThenBy(f => EF.Property<object>(f, "City")).ThenBy(f => EF.Property<object>(f, "PostalCode")).ThenBy(f => EF.Property<object>(f, "Street")).ThenBy(f => EF.Property<object>(f, "Phone")).ThenBy(f => EF.Property<object>(f, "Email"));
+					students = students.OrderBy(s => EF.Property<object>(s, sortByName));
 				}
 				else
 				{
-					students = students.OrderByDescending(s => EF.Property<object>(s, "Name")).ThenByDescending(d => EF.Property<object>(d, "Surname")).ThenByDescending(f => EF.Property<object>(f, "Patron")).ThenByDescending(f => EF.Property<object>(f, "Faculty")).ThenByDescending(f => EF.Property<object>(f, "Specialty")).ThenByDescending(f => EF.Property<object>(f, "Course")).ThenByDescending(f => EF.Property<object>(f, "Group")).ThenByDescending(f => EF.Property<object>(f, "City")).ThenByDescending(f => EF.Property<object>(f, "PostalCode")).ThenByDescending(f => EF.Property<object>(f, "Street")).ThenByDescending(f => EF.Property<object>(f, "Phone")).ThenByDescending(f => EF.Property<object>(f, "Email"));
+					students = students.OrderByDescending(s => EF.Property<object>(s, sortByName));
 				}
 			}
 
