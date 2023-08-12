@@ -13,86 +13,13 @@
           </div>
           Id
         </th>
-        <th @click="sortStudent(`Name`)">
-          Имя
-          <span v-if="sortTitle === 'Name'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Surname`)">
-          Фамилия
-          <span v-if="sortTitle === 'Surname'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Patron`)">
-          Отчество
-          <span v-if="sortTitle === 'Patron'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Faculty`)">
-          Факультет
-          <span v-if="sortTitle === 'Faculty'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Specialty`)">
-          Специальность
-          <span v-if="sortTitle === 'Specialty'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Course`)">
-          Kypc
-          <span v-if="sortTitle === 'Course'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Group`)">
-          Группа
-          <span v-if="sortTitle === 'Group'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`City`)">
-          Город
-          <span v-if="sortTitle === 'City'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`PostalCode`)">
-          Индекс
-          <span v-if="sortTitle === 'PostalCode'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Street`)">
-          Улица
-          <span v-if="sortTitle === 'Street'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Phone`)">
-          Телефон
-          <span v-if="sortTitle === 'Phone'">
-            <i v-if="cont === 1">↓</i>
-            <i v-else-if="cont === 2">↑</i>
-          </span>
-        </th>
-        <th @click="sortStudent(`Email`)">
-          Почта
-          <span v-if="sortTitle === 'Email'">
+        <th
+          v-for="field in tableFields"
+          :key="field.key"
+          @click="sortStudent(field.key)"
+        >
+          {{ field.label }}
+          <span v-if="sortTitle === field.key">
             <i v-if="cont === 1">↓</i>
             <i v-else-if="cont === 2">↑</i>
           </span>
@@ -104,19 +31,7 @@
         v-for="dep in getAllStudents"
         :key="dep.id"
       >
-        <td>{{ dep.id }}</td>
-        <td>{{ dep.name }}</td>
-        <td>{{ dep.surname }}</td>
-        <td>{{ dep.patron }}</td>
-        <td>{{ dep.faculty }}</td>
-        <td>{{ dep.specialty }}</td>
-        <td>{{ dep.course }}</td>
-        <td>{{ dep.group }}</td>
-        <td>{{ dep.city }}</td>
-        <td>{{ dep.postalCode }}</td>
-        <td>{{ dep.street }}</td>
-        <td>{{ dep.phone }}</td>
-        <td>{{ dep.email }}</td>
+        <td v-for="field in tableFields" :key="field.key">{{ getValueFromKey(dep,field.key) }}</td>
         <td>
           <div class="d-flex flex-column align-items-center">
             <button
@@ -173,7 +88,21 @@ export default ({
     return {
       nameFilter: "", //фильтр по имени
       cont: 0,
-      sortTitle: ""
+      sortTitle: "",
+      tableFields: [
+        { key: "Name", label: "Имя" },
+        { key: "Surname", label: "Фамилия" },
+        { key: "Patron", label: "Отчество" },
+        { key: "Faculty", label: "Факультет" },
+        { key: "Specialty", label: "Специальность" },
+        { key: "Course", label: "Курс" },
+        { key: "Group", label: "Группа" },
+        { key: "City", label: "Город" },
+        { key: "PostalCode", label: "Почтовый Индекс" },
+        { key: "Street", label: "Улица" },
+        { key: "Phone", label: "Телефон" },
+        { key: "Email", label: "Почта" }
+      ]
     };
   },
   computed: {
@@ -182,6 +111,10 @@ export default ({
     }
   },
   methods: {
+    getValueFromKey(student, key) {
+      const keyFeature = key.toLowerCase();
+      return student[keyFeature]; // вернет значение из объекта student по ключу key
+    },
     filterFunction() {
       this.$store.dispatch("filterStudents", this.nameFilter);
     },

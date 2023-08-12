@@ -23,6 +23,7 @@ namespace EF_web_app.Controllers
 		public async Task<IActionResult> Get(string ? sortByParam, bool sortAsc = true, string? filter = null)
 		{
 			IQueryable<Student> students = _context.Students;
+
 			if (!string.IsNullOrEmpty(filter))
 			{
 				students = students.Where(s => s.Name.ToLower().Contains(filter.ToLower()));
