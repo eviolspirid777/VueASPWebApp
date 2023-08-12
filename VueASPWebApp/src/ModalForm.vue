@@ -84,7 +84,7 @@
               class="btn-own-cls"
               @click="closeWindow()"
             >
-              Закрыть
+              Отмена
             </button>
             <button
               class="btn-own-cls"
@@ -191,6 +191,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding: 10px;
+  justify-content: space-between;
 }
 
 .modal-enter-active,
@@ -228,6 +229,7 @@ input {
 }
 
 .btn-own-cls {
+  width: 120px;
   padding: 10px 20px;
   font-size: 14px;
   border: none;

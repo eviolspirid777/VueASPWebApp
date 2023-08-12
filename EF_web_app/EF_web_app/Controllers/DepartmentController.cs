@@ -13,67 +13,66 @@ namespace EF_web_app.Controllers
 	{
 		private readonly ApplicationDbContext _context;
 
-		static bool flag = true;																		//буль для хранения состояния
 		public DepartmentController(ApplicationDbContext context)
 		{
 			_context = context;
-			_context.Database.EnsureCreated();                                      //устанавливает связи в БД
+			_context.Database.EnsureCreated();                                      //устанавливает связи с БД
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Get(string ? sortByName, bool sortAsc = true, string? filter = null)
+		[HttpGet]									//Получение списка студентов(+сортировка, + фильтрация)
+		public async Task<IActionResult> Get(string ? sortByParam, bool sortAsc = true, string? filter = null)
 		{
 			IQueryable<Student> students = _context.Students;
-
 			if (!string.IsNullOrEmpty(filter))
 			{
 				students = students.Where(s => s.Name.ToLower().Contains(filter.ToLower()));
 			}
-
-			if (!string.IsNullOrEmpty(sortByName))
+			if (!string.IsNullOrEmpty(sortByParam))
 			{
 				if (sortAsc)
 				{
-					students = students.OrderBy(s => EF.Property<object>(s, sortByName));
+					students = students.OrderBy(s => EF.Property<object>(s, sortByParam));						//порядок по ВОЗРАСТАНИЮ
 				}
 				else
 				{
-					students = students.OrderByDescending(s => EF.Property<object>(s, sortByName));
+					students = students.OrderByDescending(s => EF.Property<object>(s, sortByParam));				//порядок по УБЫВАНИЮ
 				}
 			}
-
 			List<Student> studentList = await students.ToListAsync();
-			return new JsonResult(studentList);
+			if (studentList.Count == 0)							//проверка на пустой список (error 404)
+			{
+				return NotFound();
+			}
+			return Ok(studentList);						//возвращаем код 200(Ok) + список студентов
 		}
 
-		[HttpPost]
+		[HttpPost]													//Добавление студента
 		public async Task<IActionResult> Post(Student student)
 		{
 			_context.Students.Add(student);
 			await _context.SaveChangesAsync();
-			return new JsonResult("Added Successfully");
+			return Ok();                                                                //возвращаем код 200(Ok)
 		}
 
-		[HttpPut]
+		[HttpPut]											//Изменение данных о студенте
 		public async Task<IActionResult> Put(Student student)
 		{
 			_context.Entry(student).State = EntityState.Modified;
 			await _context.SaveChangesAsync();
-			return new JsonResult("Updated Successfully");
+			return Ok();                                                                            //возвращаем код 200(Ok)
 		}
 
-		[HttpDelete("{ID}")]
+		[HttpDelete("{ID}")]										//Удаление студента(по id)
 		public async Task<IActionResult> Delete(int id)
 		{
 			var student = await _context.Students.FindAsync(id);
-			if (student == null)
+			if (student == null)                                                                            //проверка на пустого студента (error 404)
 			{
 				return NotFound();
 			}
-
 			_context.Students.Remove(student);
 			await _context.SaveChangesAsync();
-			return new JsonResult("Deleted Successfully");
+			return Ok();                                                                                                            //возвращаем код 200(Ok)
 		}
 	}
 }

@@ -3,12 +3,14 @@
     id="app"
     class="container"
   >
-    <h3 class="d-flex justify-content-center">
-      Vue.js + postgreSQL + Web API
-    </h3>
-    <h5 class="d-flex justify-content-center">
-      Управление студентами
-    </h5>
+    <header>
+      <h3 class="d-flex justify-content-center">
+        Vue.js + postgreSQL + Web API
+      </h3>
+      <h5 class="d-flex justify-content-center">
+        Управление студентами
+      </h5>
+    </header>
     <Student />
   </div>
 </template>

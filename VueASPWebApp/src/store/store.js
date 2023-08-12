@@ -47,9 +47,9 @@ export default new Vuex.Store({
     },
     async sortStudents({ commit, state }, { name, asc }) {
       commit("setSort", { name, asc });
-      const sortByName = state.sortName;
+      const sortByParam = state.sortName;
       const sortAsc = state.sortAsc;
-      const students = await DataClient.getAllData("", sortByName, sortAsc);
+      const students = await DataClient.getAllData("", sortByParam, sortAsc);
       commit("setStudents", students);
     },
     async filterStudents({ commit, state }, nameFilt) {

@@ -3,10 +3,10 @@ import axios from "axios";
 const API_URL = "http://localhost:5000/api/department/";
 
 const DataClient = {
-  async getAllData(filter = "", sortByName = "", sortAsc = true) {
+  async getAllData(filter = "", sortByParam = "", sortAsc = true) {
     const response = await axios.get(API_URL, {
       params: {
-        sortByName,
+        sortByParam,
         sortAsc,
         filter
       }
