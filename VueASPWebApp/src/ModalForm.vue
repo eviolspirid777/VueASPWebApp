@@ -7,73 +7,73 @@
             {{ modalTitle }}
           </h1>
           <hr>
-          <label for="name">Имя:</label>
+          <label for="name" class="label-input">Имя:</label>
           <input
             id="name"
             v-model="formData.name"
             type="text"
           >
-          <label for="surname">Фамилия:</label>
+          <label for="surname" class="label-input">Фамилия:</label>
           <input
             id="surname"
             v-model="formData.surname"
             type="text"
           >
-          <label for="patron">Отчество:</label>
+          <label for="patron" class="label-input" >Отчество:</label>
           <input
             id="patron"
             v-model="formData.patron"
             type="text"
           >
-          <label for="fac">Факультет:</label>
+          <label for="fac" class="label-input">Факультет:</label>
           <input
             id="fac"
             v-model="formData.faculty"
             type="text"
           >
-          <label for="specialty">Специальность:</label>
+          <label for="specialty" class="label-input">Специальность:</label>
           <input
             id="specialty"
             v-model="formData.specialty"
             type="text"
           >
-          <label for="course">Курс:</label>
+          <label for="course" class="label-input">Курс:</label>
           <input
             id="course"
             v-model="formData.course"
             type="text"
           >
-          <label for="group">Группа:</label>
+          <label for="group" class="label-input">Группа:</label>
           <input
             id="group"
             v-model="formData.group"
             type="text"
           >
-          <label for="city">Город:</label>
+          <label for="city" class="label-input">Город:</label>
           <input
             id="city"
             v-model="formData.city"
             type="text"
           >
-          <label for="postindx">Почтовый индекс:</label>
+          <label for="postindx" class="label-input">Почтовый индекс:</label>
           <input
             id="postindx"
             v-model="formData.postalCode"
             type="text"
           >
-          <label for="street">Улица:</label>
+          <label for="street" class="label-input">Улица:</label>
           <input
             id="street"
             v-model="formData.street"
             type="text"
           >
-          <label for="telephone">Телефон:</label>
+          <label for="telephone" class="label-input">Телефон:</label>
           <input
             id="telephone"
             v-model="formData.phone"
             type="text"
           >
-          <label for="post">Почта:</label>
+          <label for="post" class="label-input">Почта:</label>
           <input
             id="post"
             v-model="formData.email"
@@ -137,7 +137,7 @@ export default {
     }
   },
   methods: {
-    submitStudent() {
+    async submitStudent() {
       for (const key in this.formData) {
         if (this.formData[key] === "") {
           alert(`Пожалуйста заполните ${key} поле!`);
@@ -146,11 +146,12 @@ export default {
       }
 
       if (Object.keys(this.sendData).length === 0) {
-        this.$store.dispatch("addStudent", this.formData);
+        await this.$store.dispatch("addStudent", this.formData);
+        await this.$store.dispatch("fetchStudents");
         this.closeWindow();
       }
       else {
-        this.$store.dispatch("updateStudent", this.formData);
+        await this.$store.dispatch("updateStudent", this.formData);
         this.$store.dispatch("fetchStudents");
         this.closeWindow();
       }
@@ -243,4 +244,7 @@ input {
   margin-right: 10px;
 }
 
+.label-input {
+  margin-bottom: 20px;
+}
 </style>

@@ -2,24 +2,13 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>
-          <div class="d-flex flex-row">
-            <input
-              v-model="nameFilter"
-              class="form-control-m-2"
-              placeholder="Фильтр"
-              @input="filterFunction()"
-            >
-          </div>
-          Id
-        </th>
         <th
           v-for="field in tableFields"
           :key="field.key"
           @click="sortStudent(field.key)"
         >
           {{ field.label }}
-          <span v-if="sortTitle === field.key">
+          <span v-if="sortTitle === field.key" class="th-icon-container">
             <i v-if="cont === 1">↓</i>
             <i v-else-if="cont === 2">↑</i>
           </span>
@@ -33,7 +22,7 @@
       >
         <td v-for="field in tableFields" :key="field.key">{{ getValueFromKey(dep,field.key) }}</td>
         <td>
-          <div class="d-flex flex-column align-items-center">
+          <div class="d-flex">
             <button
               type="button"
               class="btn-b-0-20"
@@ -86,10 +75,10 @@ export default ({
   store,
   data() {
     return {
-      nameFilter: "", //фильтр по имени
       cont: 0,
       sortTitle: "",
       tableFields: [
+        { key: "id", label: "id" },
         { key: "Name", label: "Имя" },
         { key: "Surname", label: "Фамилия" },
         { key: "Patron", label: "Отчество" },
@@ -98,7 +87,7 @@ export default ({
         { key: "Course", label: "Курс" },
         { key: "Group", label: "Группа" },
         { key: "City", label: "Город" },
-        { key: "PostalCode", label: "Почтовый Индекс" },
+        { key: "PostalCode", label: "Почтовый индекс" },
         { key: "Street", label: "Улица" },
         { key: "Phone", label: "Телефон" },
         { key: "Email", label: "Почта" }
@@ -112,11 +101,12 @@ export default ({
   },
   methods: {
     getValueFromKey(student, key) {
-      const keyFeature = key.toLowerCase();
-      return student[keyFeature]; // вернет значение из объекта student по ключу key
-    },
-    filterFunction() {
-      this.$store.dispatch("filterStudents", this.nameFilter);
+      let keyFeature = "";
+      if (key !== "PostalCode") {
+        keyFeature = key.toLowerCase();
+        return student[keyFeature]; // вернет значение из объекта student по ключу key
+      }
+      return student["postalCode"];
     },
     editStudent(dep) {
       this.$emit("click", dep);
@@ -156,10 +146,22 @@ export default ({
 th:nth-child(n+2):hover{
   color: rgba(15, 83, 252);
 }
-.form-control-m-2:hover{
-  border: 2px solid rgba(15, 83, 252);
-}
 .btn-b-0-20:hover{
   border: 2px solid rgba(15, 83, 252);
+}
+td{
+  border: 1px solid black;
+  align-content: center;
+  align-items: center;
+}
+th, .d-flex{
+  white-space: nowrap;
+}
+.th-icon-container {
+  position: relative;
+}
+
+.th-icon-container i {
+  position: absolute;
 }
 </style>
