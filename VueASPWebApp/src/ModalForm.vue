@@ -112,6 +112,7 @@ export default {
   data() {
     return {
       formData: {
+        id: this.sendData.id ?? "",
         name: this.sendData.name ?? "",
         surname: this.sendData.surname ?? "",
         patron: this.sendData.patron ?? "",
@@ -139,7 +140,7 @@ export default {
   methods: {
     async submitStudent() {
       for (const key in this.formData) {
-        if (this.formData[key] === "") {
+        if (this.formData[key] === "" && this.formData["id"] !== "") {
           alert(`Пожалуйста заполните ${key} поле!`);
           return;
         }
@@ -147,7 +148,7 @@ export default {
 
       if (Object.keys(this.sendData).length === 0) {
         await this.$store.dispatch("addStudent", this.formData);
-        await this.$store.dispatch("fetchStudents");
+        this.$store.dispatch("fetchStudents");
         this.closeWindow();
       }
       else {

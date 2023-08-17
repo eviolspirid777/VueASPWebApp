@@ -8,7 +8,10 @@
           @click="sortStudent(field.key)"
         >
           {{ field.label }}
-          <span v-if="sortTitle === field.key" class="th-icon-container">
+          <span
+            v-if="sortTitle === field.key"
+            class="th-icon-container"
+          >
             <i v-if="cont === 1">↓</i>
             <i v-else-if="cont === 2">↑</i>
           </span>
@@ -20,7 +23,12 @@
         v-for="dep in getAllStudents"
         :key="dep.id"
       >
-        <td v-for="field in tableFields" :key="field.key">{{ getValueFromKey(dep,field.key) }}</td>
+        <td
+          v-for="field in tableFields"
+          :key="field.key"
+        >
+          {{ getValueFromKey(dep,field.key) }}
+        </td>
         <td>
           <div class="d-flex">
             <button
@@ -156,6 +164,7 @@ td{
 }
 th, .d-flex{
   white-space: nowrap;
+  text-align: center;
 }
 .th-icon-container {
   position: relative;

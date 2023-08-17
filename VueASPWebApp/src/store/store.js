@@ -9,7 +9,7 @@ export default new Vuex.Store({
     students: [],
     studName: "",
     sortName: "",
-    sortAsc: true
+    sortAsc: ""
   },
   mutations: {
     addStudent(state, studentData) {
@@ -40,8 +40,9 @@ export default new Vuex.Store({
       await DataClient.deleteStudent(ID);
       dispatch("fetchStudents");
     },
-    async updateStudent(studentData) {
+    async updateStudent(state, studentData) {
       await DataClient.updateStudentData(studentData);
+      return;
     },
     async sortStudents({ commit, state }, { name, asc }) {
       commit("setSort", { name, asc });

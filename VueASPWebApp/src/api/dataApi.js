@@ -22,7 +22,7 @@ const DataClient = {
     return response.data;
   },
   async updateStudentData(studentData) {
-    const response = axios.put(API_URL, studentData);
+    const response = await axios.put(API_URL, studentData);
     return response.data;
   }
 };
