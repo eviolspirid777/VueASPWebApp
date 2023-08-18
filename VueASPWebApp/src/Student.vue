@@ -4,11 +4,6 @@
       rel="stylesheet"
       type="text/css"
     >
-    <ModalForm
-      v-if="showModal"
-      :send-data="selectedStudent"
-      @close="closeModalWindow()"
-    />
     <div class="d-flex flex-row">
       <button
         id="show-modal"
@@ -26,27 +21,19 @@
         @input="filterFunction()"
       >
     </div>
-    <TableForm
-      @click="editStudent"
-    />
+    <TableForm />
   </div>
 </template>
 
 <script>
-import ModalForm from "./ModalForm.vue";
-import store from "./store/store";
-import TableForm from "./Table.vue";
+import TableForm from "./StudentTable.vue";
 
 export default ({
   components: {
-    ModalForm,
     TableForm
   },
-  store,
   data() {
     return {
-      showModal: false, //буль для отображения окна добавления студента
-      selectedStudent: {},
       nameFilter: ""
     };
   },
@@ -55,24 +42,9 @@ export default ({
       return this.$store.getters.getAllStudents;
     }
   },
-  async mounted() {
-    await this.refreshData();
-  },
   methods: {
-    async refreshData() {
-      await this.$store.dispatch("fetchStudents");
-    },
     filterFunction() {
       this.$store.dispatch("filterStudents", this.nameFilter);
-    },
-    editStudent(dep) {
-      this.selectedStudent = dep;
-      this.showModal = true;
-      this.refreshData();
-    },
-    closeModalWindow() {
-      this.selectedStudent = {};
-      this.showModal = !this.showModal;
     }
   }
 });

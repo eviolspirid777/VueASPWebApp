@@ -9,7 +9,7 @@ export default new Vuex.Store({
     students: [],
     studName: "",
     sortName: "",
-    sortAsc: ""
+    sortAsc: true
   },
   mutations: {
     addStudent(state, studentData) {

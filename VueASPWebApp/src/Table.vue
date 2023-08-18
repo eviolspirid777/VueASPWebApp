@@ -80,32 +80,26 @@
 import store from "./store/store";
 
 export default ({
+  props: {
+    tableFields: {
+      type: Array,
+      default: () => {
+        [];
+      }
+    },
+    getAllStudents: {
+      type: Array,
+      default: () => {
+        [];
+      }
+    }
+  },
   store,
   data() {
     return {
       cont: 0,
-      sortTitle: "",
-      tableFields: [
-        { key: "id", label: "id" },
-        { key: "Name", label: "Имя" },
-        { key: "Surname", label: "Фамилия" },
-        { key: "Patron", label: "Отчество" },
-        { key: "Faculty", label: "Факультет" },
-        { key: "Specialty", label: "Специальность" },
-        { key: "Course", label: "Курс" },
-        { key: "Group", label: "Группа" },
-        { key: "City", label: "Город" },
-        { key: "PostalCode", label: "Почтовый индекс" },
-        { key: "Street", label: "Улица" },
-        { key: "Phone", label: "Телефон" },
-        { key: "Email", label: "Почта" }
-      ]
+      sortTitle: ""
     };
-  },
-  computed: {
-    getAllStudents() {
-      return this.$store.getters.getAllStudents;
-    }
   },
   methods: {
     getValueFromKey(student, key) {
