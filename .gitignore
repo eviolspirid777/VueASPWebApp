@@ -26,3 +26,15 @@ obj/**/*
 /**/obj/*
 ./**/**/obj
 ./**/obj
+
+../EF_web_app/EF_web_app/bin/
+bin/
+/**/bin/**/*
+/./**/bin/**/*
+./**/bin/**/*
+**/bin/**/*
+*/bin/**/*
+bin/**/*
+/**/bin/*
+./**/**/bin
+./**/bin
