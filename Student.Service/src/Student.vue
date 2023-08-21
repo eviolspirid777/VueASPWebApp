@@ -15,7 +15,7 @@
       </button>
       <ModalForm
         v-show="showModal"
-        @close="showModal = false"
+        @close="showModalFalse()"
       />
       <input
         v-model="nameFilter"
@@ -25,7 +25,9 @@
         @input="filterFunction()"
       >
     </div>
-    <TableForm />
+    <TableForm
+      @getStudentData="sendStudentData"
+    />
   </div>
 </template>
 
@@ -52,6 +54,12 @@ export default ({
   methods: {
     filterFunction() {
       this.$store.dispatch("filterStudents", this.nameFilter);
+    },
+    showModalFalse() {
+      this.showModal = false;
+    },
+    sendStudentData(data) {
+      this.$emit("getStudentData", data);
     }
   }
 });
@@ -61,6 +69,7 @@ export default ({
 
 .form-control-m-2{
   width:100px;
+  padding-left: 20px;
 }
 
 .modal-mask{
@@ -81,6 +90,7 @@ export default ({
   background-color: rgba(15, 83, 252, 1);
   cursor: pointer;
   color: white;
+  box-shadow: 2px 3px 8px #007bff;
 }
 
 input{

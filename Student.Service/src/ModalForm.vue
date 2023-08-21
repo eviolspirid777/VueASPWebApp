@@ -3,8 +3,8 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <h1 style="font-size: 30px;">
-            {{ modalTitle }}
+          <h1>
+            Данные о студенте
           </h1>
           <hr>
           <label
@@ -195,6 +195,14 @@ export default {
     },
     closeWindow() {
       this.$emit("close");
+      this.resetForm();
+    },
+    resetForm() {
+      for (const key in this.formData) {
+        if (key !== "id") {
+          this.formData[key] = "";
+        }
+      }
     }
   }
 };
@@ -218,6 +226,7 @@ export default {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 20px #007bff;
 }
 
 .modal-container {
@@ -243,9 +252,11 @@ export default {
 }
 
 h1 {
-  color: rgba(15, 83, 252, 1);
-  font-size: 20px;
-  margin: 20px 0;
+  padding-bottom: 10px;
+  font-size: 30px;
+  margin-left: 22%;
+  color: rgb(221, 221, 255);
+  text-shadow: 1px 1px 5px rgba(15, 83, 252, 1), 1px 1px 10px rgb(19, 38, 87);
 }
 
 label {
@@ -269,7 +280,7 @@ input {
 .btn-own-cls {
   width: 120px;
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 15px;
   border: none;
   background-color: #007bff;
   color: white;

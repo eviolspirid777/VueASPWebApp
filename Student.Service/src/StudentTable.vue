@@ -1,7 +1,7 @@
 <template>
   <div>
     <ModalForm
-      v-if="showModal"
+      v-show="showModal"
       :send-data="selectedStudent"
       @close="closeModalWindow()"
     />
@@ -9,6 +9,7 @@
       :table-fields="tableFields"
       :get-all-students="sendAllStudents"
       @click="editStudent"
+      @getStudentData="sendStudentData"
     />
   </div>
 </template>
@@ -65,6 +66,9 @@ export default Vue.extend({
     closeModalWindow() {
       this.selectedStudent = {};
       this.showModal = !this.showModal;
+    },
+    sendStudentData(data) {
+      this.$emit("getStudentData", data);
     }
   }
 });

@@ -27,7 +27,20 @@ namespace EF_web_app.Controllers
 
 			if (!string.IsNullOrEmpty(filter))
 			{
-				students = students.Where(s => s.Name.ToLower().StartsWith(filter.ToLower()));
+				students = students.Where(s => s.Name.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Surname.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Patron.ToLower().StartsWith(filter.ToLower()) ||
+																	s.PostalCode.ToLower().StartsWith(filter.ToLower()) ||
+																	s.City.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Course.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Email.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Faculty.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Group.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Specialty.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Street.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Email.ToLower().StartsWith(filter.ToLower()) ||
+																	s.Phone.ToLower().StartsWith(filter.ToLower())
+																	);
 			}
 			if (!string.IsNullOrEmpty(sortByParam))
 			{
