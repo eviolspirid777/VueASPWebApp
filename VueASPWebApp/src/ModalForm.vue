@@ -148,7 +148,7 @@ export default {
   data() {
     return {
       formData: {
-        id: this.sendData.id ?? "",
+        id: this.sendData.id ?? undefined,
         name: this.sendData.name ?? "",
         surname: this.sendData.surname ?? "",
         patron: this.sendData.patron ?? "",

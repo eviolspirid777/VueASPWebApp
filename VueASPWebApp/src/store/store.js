@@ -29,7 +29,7 @@ export default new Vuex.Store({
   actions: {
     async addStudent({ commit }, studentData) {
       commit("addStudent", studentData);
-      DataClient.postStudent(studentData);
+      await DataClient.postStudent(studentData);
     },
     async fetchStudents({ commit }) {
       const students = await DataClient.getAllData();

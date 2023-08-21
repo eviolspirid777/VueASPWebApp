@@ -38,3 +38,5 @@ bin/**/*
 /**/bin/*
 ./**/**/bin
 ./**/bin
+
+../EF_web_app/.vs/EF_web_app/FileContentIndex/

@@ -13,6 +13,10 @@
       >
         Добавить студента
       </button>
+      <ModalForm
+        v-show="showModal"
+        @close="showModal = false"
+      />
       <input
         v-model="nameFilter"
         style="margin-left: 10px;"
@@ -26,15 +30,18 @@
 </template>
 
 <script>
+import ModalForm from "./ModalForm.vue";
 import TableForm from "./StudentTable.vue";
 
 export default ({
   components: {
-    TableForm
+    TableForm,
+    ModalForm
   },
   data() {
     return {
-      nameFilter: ""
+      nameFilter: "",
+      showModal: false
     };
   },
   computed: {
