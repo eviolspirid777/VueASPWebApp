@@ -6,8 +6,8 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/Student", component: Student },
-  { name: "/StudentInfo", path: "/StudentInfo", component: StudentInfo }
+  { name: "Student", path: "/Student", component: Student },
+  { name: "StudentInfo", path: "/StudentInfo/:studentId", component: StudentInfo }
 ];
 
 const routers = new VueRouter({

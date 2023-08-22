@@ -14,7 +14,7 @@
         Добавить студента
       </button>
       <ModalForm
-        v-show="showModal"
+        v-if="showModal"
         @close="showModalFalse()"
       />
       <input
@@ -25,9 +25,7 @@
         @input="filterFunction()"
       >
     </div>
-    <TableForm
-      @getStudentData="sendStudentData"
-    />
+    <TableForm />
   </div>
 </template>
 
@@ -57,9 +55,6 @@ export default ({
     },
     showModalFalse() {
       this.showModal = false;
-    },
-    sendStudentData(data) {
-      this.$emit("getStudentData", data);
     }
   }
 });

@@ -17,12 +17,14 @@
     >
       Студенты
     </RouterLink>
-    <RouterLink v-show="showInfo" to="/StudentInfo">
+    <RouterLink
+      :to="{ name: 'StudentInfo', params: { studentId: student.id } }"
+      hidden
+    >
       Информация
     </RouterLink>
     <RouterView
       class="router-view"
-      @getStudentData="absorbData"
     />
   </div>
 </template>
@@ -32,17 +34,17 @@ export default {
   name: "App",
   data() {
     return {
-      showInfo: false,
       student: {}
     };
+  },
+  created() {
+    this.$root.$on("getStudentData", student => {
+      this.student = student;
+    });
   },
   methods: {
     showInfoSwitcher() {
       this.showInfo = !this.showInfo;
-    },
-    absorbData(information) {
-      this.student = information;
-      this.showInfoSwitcher();
     }
   }
 };

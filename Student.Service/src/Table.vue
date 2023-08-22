@@ -151,7 +151,8 @@ export default ({
       }
     },
     sendStudentData(dep) {
-      this.$emit("getStudentData", dep);
+      this.$root.$emit("getStudentData", dep);
+      this.$router.push({ name: "StudentInfo", params: { studentId: dep.id } });
     }
   }
 });
