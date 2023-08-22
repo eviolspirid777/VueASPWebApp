@@ -78,7 +78,11 @@ div{
   border-radius: 20px;
   width: 600px;
   align-items: center;
-  box-shadow: 4px 3px 5px 1px rgba(15, 83, 252);
+  transition: box-shadow 0.6s ease-in-out;
+  box-shadow: 4px 3px 25px 1px rgba(15, 83, 252, 0.2);
+}
+div:hover{
+  box-shadow: 4px 3px 25px 1px rgba(15, 83, 252, 0.6);
 }
 h3{
   padding-bottom: 10px;
@@ -97,8 +101,9 @@ p label{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 p label:hover{
+  transition: color 0.4s ease-in-out, text-shadow 0.2s ease-in-out;
   color: rgba(15, 83, 252, 1);
-  text-shadow: 1px 1px 1px rgba(15, 83, 252, 1);
+  text-shadow: 1px 1px 1px rgb(42, 100, 245);
   cursor: pointer;
 }
 </style>
