@@ -40,6 +40,7 @@ export default {
   created() {
     this.$root.$on("getStudentData", student => {
       this.student = student;
+      this.$router.push({ name: "StudentInfo", params: { studentId: student.id } });
     });
   },
   methods: {

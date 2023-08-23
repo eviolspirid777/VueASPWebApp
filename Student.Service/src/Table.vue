@@ -112,22 +112,18 @@ export default ({
     };
   },
   methods: {
-    getValueFromKey(student, key) {
-      let keyFeature = "";
-      if (key !== "PostalCode") {
-        keyFeature = key.toLowerCase();
-        return student[keyFeature]; // вернет значение из объекта student по ключу key
-      }
-      return student["postalCode"];
+    getValueFromKey(value, key) {
+      key = key.charAt(0).toLowerCase() + key.slice(1);
+      return value[key];
     },
-    editStudent(dep) {
-      this.$emit("click", dep);
+    editStudent(value) {
+      this.$emit("click", value);
     },
     deleteStudent(ID) {
       if (!confirm("Вы уверены?")) {
         return;
       }
-      this.$store.dispatch("deleteStudent", ID);
+      this.$emit("delete", ID);
     },
     sortStudent(title) {
       if (this.sortTitle === title) {
@@ -139,20 +135,19 @@ export default ({
       }
 
       if (this.cont === 1) {
-        this.$store.dispatch("sortStudents", { name: this.sortTitle, asc: true });
+        this.$emit("sort", this.sortTitle, true);
       }
       else if (this.cont === 2) {
-        this.$store.dispatch("sortStudents", { name: this.sortTitle, asc: false });
+        this.$emit("sort", this.sortTitle, false);
       }
       else if (this.cont === 3) {
-        this.$store.dispatch("fetchStudents");
+        this.$emit("refreshData");
         this.cont = 0;
         this.sortTitle = "";
       }
     },
-    sendStudentData(dep) {
-      this.$root.$emit("getStudentData", dep);
-      this.$router.push({ name: "StudentInfo", params: { studentId: dep.id } });
+    sendStudentData(value) {
+      this.$emit("sendData", value);
     }
   }
 });

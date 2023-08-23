@@ -6,16 +6,7 @@
           <h1>
             Данные о студенте
           </h1>
-          <hr>
-          <label
-            for="name"
-            class="label-input"
-          >Имя:</label>
-          <input
-            id="name"
-            v-model="formData.name"
-            type="text"
-          >
+          <hr style="color:rgb(46, 73, 108)">
           <label
             for="surname"
             class="label-input"
@@ -23,6 +14,15 @@
           <input
             id="surname"
             v-model="formData.surname"
+            type="text"
+          >
+          <label
+            for="name"
+            class="label-input"
+          >Имя:</label>
+          <input
+            id="name"
+            v-model="formData.name"
             type="text"
           >
           <label
@@ -147,30 +147,52 @@ export default {
   },
   data() {
     return {
-      formData: {
-        id: this.sendData.id ?? undefined,
-        name: this.sendData.name ?? "",
-        surname: this.sendData.surname ?? "",
-        patron: this.sendData.patron ?? "",
-        faculty: this.sendData.faculty ?? "",
-        specialty: this.sendData.specialty ?? "",
-        course: this.sendData.course ?? "",
-        group: this.sendData.group ?? "",
-        city: this.sendData.city ?? "",
-        postalCode: this.sendData.postalCode ?? "",
-        street: this.sendData.street ?? "",
-        phone: this.sendData.phone ?? "",
-        email: this.sendData.email ?? ""
-      }
+      // formData: {
+      //   id: this.sendData.id ?? undefined,
+      //   name: this.sendData.name ?? "",
+      //   surname: this.sendData.surname ?? "",
+      //   patron: this.sendData.patron ?? "",
+      //   faculty: this.sendData.faculty ?? "",
+      //   specialty: this.sendData.specialty ?? "",
+      //   course: this.sendData.course ?? "",
+      //   group: this.sendData.group ?? "",
+      //   city: this.sendData.city ?? "",
+      //   postalCode: this.sendData.postalCode ?? "",
+      //   street: this.sendData.street ?? "",
+      //   phone: this.sendData.phone ?? "",
+      //   email: this.sendData.email ?? ""
+      // }
     };
   },
   computed: {
-    ...mapGetters(["getAllStudents"]),
+    ...mapGetters(["allStudents"]),
     totalStudents() {
-      return this.getAllStudents.length;
+      return this.allStudents.length;
     },
     modalTitle() {
       return Object.keys(this.sendData).length !== 0 ? "Редактировать Студента" : "Добавить Студента";
+    },
+    formData() {
+      if (Object.keys(this.sendData).length === 0) {
+        return {
+          id: undefined,
+          name: "",
+          surname: "",
+          patron: "",
+          faculty: "",
+          specialty: "",
+          course: "",
+          group: "",
+          city: "",
+          postalCode: "",
+          street: "",
+          phone: "",
+          email: ""
+        };
+      }
+      else {
+        return { ...this.sendData };
+      }
     }
   },
   methods: {
@@ -230,6 +252,8 @@ export default {
 }
 
 .modal-container {
+  border-radius: 10px;
+  background-color: rgba(46, 73, 108, 0.87);
   padding: 20px;
   text-align: left;
 }
@@ -294,5 +318,8 @@ input {
 
 .label-input {
   margin-bottom: 20px;
+}
+label{
+  color: #ffffffd3;
 }
 </style>

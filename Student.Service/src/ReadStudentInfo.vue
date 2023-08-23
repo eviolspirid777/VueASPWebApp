@@ -3,13 +3,10 @@
     <h3>Информация о студенте</h3>
     <hr style="height: 2px; color:rgba(15, 82, 252, 0.849) ;">
     <p>
-      <label>ID: {{ studentData.id }}</label>
+      <label>Фамилия: {{ studentData.surname }}</label>
     </p>
     <p>
       <label>Имя: {{ studentData.name }}</label>
-    </p>
-    <p>
-      <label>Фамилия: {{ studentData.surname }}</label>
     </p>
     <p>
       <label>Отчество: {{ studentData.patron }}</label>
@@ -36,7 +33,7 @@
       <label>Улица: {{ studentData.street }}</label>
     </p>
     <p>
-      <label>Телефон: {{ studentData.telephone }}</label>
+      <label>Телефон: {{ studentData.phone }}</label>
     </p>
     <p>
       <label>Почта: {{ studentData.email }}</label>
@@ -47,27 +44,17 @@
 <script>
 export default {
   name: "StudentInfo",
-  data() {
-    return {
-      studentData: {},
-      trimmedPath: NaN
-    };
-  },
   computed: {
-    sendAllStudents() {
-      return this.$store.getters.getAllStudents;
+    allStudents() {
+      return this.$store.getters.allStudents;
+    },
+    studentData() {
+      let id = this.$route.params.studentId;
+      return this.allStudents.find(student => student.id == id);
     }
   },
-  beforeMount() {
-    this.fetchStudentData();
-  },
-  methods: {
-    async fetchStudentData() {
-      const currentPath = this.$route.path;
-      const pathParts = currentPath.split("/");
-      this.trimmedPath = parseInt(pathParts[pathParts.length - 1]);
-      this.studentData = await this.sendAllStudents.find(student => student.id === this.trimmedPath);
-    }
+  async created() {
+    await this.$store.dispatch("fetchStudents");
   }
 };
 </script>

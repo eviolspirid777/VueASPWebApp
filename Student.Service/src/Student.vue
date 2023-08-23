@@ -46,7 +46,7 @@ export default ({
   },
   computed: {
     getAllStudents() {
-      return this.$store.getters.getAllStudents;
+      return this.$store.getters.allStudents;
     }
   },
   methods: {

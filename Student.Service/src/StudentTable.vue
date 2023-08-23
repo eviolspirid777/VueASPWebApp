@@ -9,6 +9,10 @@
       :table-fields="tableFields"
       :get-all-students="sendAllStudents"
       @click="editStudent"
+      @sort="sortData"
+      @refreshData="refreshData"
+      @sendData="sendMainData"
+      @delete="deleteStudent"
     />
   </div>
 </template>
@@ -30,8 +34,8 @@ export default Vue.extend({
       nameFilter: "",
       tableFields: [
         { key: "id", label: "id" },
-        { key: "Name", label: "Имя" },
         { key: "Surname", label: "Фамилия" },
+        { key: "Name", label: "Имя" },
         { key: "Patron", label: "Отчество" },
         { key: "Faculty", label: "Факультет" },
         { key: "Specialty", label: "Специальность" },
@@ -47,7 +51,7 @@ export default Vue.extend({
   },
   computed: {
     sendAllStudents() {
-      return this.$store.getters.getAllStudents;
+      return this.$store.getters.allStudents;
     }
   },
   async mounted() {
@@ -65,6 +69,15 @@ export default Vue.extend({
     closeModalWindow() {
       this.selectedStudent = {};
       this.showModal = !this.showModal;
+    },
+    sortData(tag, asc) {
+      this.$store.dispatch("sortStudents", { name: tag, asc: asc });
+    },
+    sendMainData(dep) {
+      this.$root.$emit("getStudentData", dep);
+    },
+    deleteStudent(id) {
+      this.$store.dispatch("deleteStudent", id);
     }
   }
 });

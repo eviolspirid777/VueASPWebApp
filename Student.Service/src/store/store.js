@@ -61,8 +61,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getAllStudents: state => state.students,
-    getSortProperty: state => state.sortProperty,
-    getSortAsc: state => state.sortAsc
+    allStudents: state => state.students,
+    sortProperty: state => state.sortProperty,
+    sortAsc: state => state.sortAsc
   }
 });
