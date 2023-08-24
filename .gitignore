@@ -15,7 +15,7 @@ node_modules/
 logs/
 tmp/
 
-../EF_web_app/EF_web_app/obj/
+../Student.Service/Student.Service/obj/
 obj/
 /**/obj/**/*
 /./**/obj/**/*
@@ -27,7 +27,7 @@ obj/**/*
 ./**/**/obj
 ./**/obj
 
-../EF_web_app/EF_web_app/bin/
+../Student.Service/Student.Service/bin/
 bin/
 /**/bin/**/*
 /./**/bin/**/*
@@ -39,4 +39,4 @@ bin/**/*
 ./**/**/bin
 ./**/bin
 
-../EF_web_app/.vs/EF_web_app/FileContentIndex/
+../Student.Service/Student.Service/.vs/
