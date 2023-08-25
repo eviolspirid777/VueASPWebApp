@@ -1,9 +1,5 @@
 <template id="stud">
   <div>
-    <link
-      rel="stylesheet"
-      type="text/css"
-    >
     <div class="d-flex flex-row">
       <button
         id="show-modal"
@@ -15,14 +11,14 @@
       </button>
       <ModalForm
         v-if="showModal"
-        @close="showModalFalse()"
+        @close="showModal = false"
       />
       <input
         v-model="nameFilter"
         style="margin-left: 10px;"
         class="form-control-m-2"
         placeholder="Фильтр"
-        @input="filterFunction()"
+        @input="debouncedFilter()"
       >
     </div>
     <TableForm />
@@ -30,8 +26,10 @@
 </template>
 
 <script>
+import _ from "lodash";
 import ModalForm from "./ModalForm.vue";
 import TableForm from "./StudentTable.vue";
+import { mapGetters } from "vuex";
 
 export default ({
   components: {
@@ -45,17 +43,14 @@ export default ({
     };
   },
   computed: {
-    getAllStudents() {
-      return this.$store.getters.allStudents;
-    }
+    ...mapGetters({
+      getAllStudents: "allStudents"
+    })
   },
   methods: {
-    filterFunction() {
+    debouncedFilter: _.debounce(function() {
       this.$store.dispatch("filterStudents", this.nameFilter);
-    },
-    showModalFalse() {
-      this.showModal = false;
-    }
+    }, 500)
   }
 });
 </script>

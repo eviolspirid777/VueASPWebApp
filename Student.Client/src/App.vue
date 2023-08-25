@@ -17,12 +17,6 @@
     >
       Студенты
     </RouterLink>
-    <RouterLink
-      :to="{ name: 'StudentInfo', params: { studentId: student.id } }"
-      hidden
-    >
-      Информация
-    </RouterLink>
     <RouterView
       class="router-view"
     />
@@ -31,23 +25,7 @@
 
 <script>
 export default {
-  name: "App",
-  data() {
-    return {
-      student: {}
-    };
-  },
-  created() {
-    this.$root.$on("getStudentData", student => {
-      this.student = student;
-      this.$router.push({ name: "StudentInfo", params: { studentId: student.id } });
-    });
-  },
-  methods: {
-    showInfoSwitcher() {
-      this.showInfo = !this.showInfo;
-    }
-  }
+  name: "App"
 };
 </script>
 

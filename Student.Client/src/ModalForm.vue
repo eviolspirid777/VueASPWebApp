@@ -1,160 +1,149 @@
 <template>
-  <Transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <h1>
-            Данные о студенте
-          </h1>
-          <hr style="color:rgb(46, 73, 108)">
-          <label
-            for="surname"
-            class="label-input"
-          >Фамилия:</label>
-          <input
-            id="surname"
-            v-model="formData.surname"
-            type="text"
+  <div class="modal-mask">
+    <div class="modal-wrapper">
+      <div class="modal-container">
+        <h1>
+          Данные о студенте
+        </h1>
+        <hr style="color:rgb(46, 73, 108)">
+        <label
+          for="surname"
+          class="label-input"
+        >Фамилия:</label>
+        <input
+          id="surname"
+          v-model="formData.surname"
+          type="text"
+        >
+        <label
+          for="name"
+          class="label-input"
+        >Имя:</label>
+        <input
+          id="name"
+          v-model="formData.name"
+          type="text"
+        >
+        <label
+          for="patron"
+          class="label-input"
+        >Отчество:</label>
+        <input
+          id="patron"
+          v-model="formData.patron"
+          type="text"
+        >
+        <label
+          for="fac"
+          class="label-input"
+        >Факультет:</label>
+        <input
+          id="fac"
+          v-model="formData.faculty"
+          type="text"
+        >
+        <label
+          for="specialty"
+          class="label-input"
+        >Специальность:</label>
+        <input
+          id="specialty"
+          v-model="formData.specialty"
+          type="text"
+        >
+        <label
+          for="course"
+          class="label-input"
+        >Курс:</label>
+        <input
+          id="course"
+          v-model="formData.course"
+          type="text"
+        >
+        <label
+          for="group"
+          class="label-input"
+        >Группа:</label>
+        <input
+          id="group"
+          v-model="formData.group"
+          type="text"
+        >
+        <label
+          for="city"
+          class="label-input"
+        >Город:</label>
+        <input
+          id="city"
+          v-model="formData.city"
+          type="text"
+        >
+        <label
+          for="postindx"
+          class="label-input"
+        >Почтовый индекс:</label>
+        <input
+          id="postindx"
+          v-model="formData.postalCode"
+          type="text"
+        >
+        <label
+          for="street"
+          class="label-input"
+        >Улица:</label>
+        <input
+          id="street"
+          v-model="formData.street"
+          type="text"
+        >
+        <label
+          for="telephone"
+          class="label-input"
+        >Телефон:</label>
+        <input
+          id="telephone"
+          v-model="formData.phone"
+          type="text"
+        >
+        <label
+          for="post"
+          class="label-input"
+        >Почта:</label>
+        <input
+          id="post"
+          v-model="formData.email"
+          type="text"
+        >
+        <div class="modal-footer">
+          <button
+            class="btn-own-cls"
+            @click="close()"
           >
-          <label
-            for="name"
-            class="label-input"
-          >Имя:</label>
-          <input
-            id="name"
-            v-model="formData.name"
-            type="text"
+            Отмена
+          </button>
+          <button
+            class="btn-own-cls"
+            @click="submit()"
           >
-          <label
-            for="patron"
-            class="label-input"
-          >Отчество:</label>
-          <input
-            id="patron"
-            v-model="formData.patron"
-            type="text"
-          >
-          <label
-            for="fac"
-            class="label-input"
-          >Факультет:</label>
-          <input
-            id="fac"
-            v-model="formData.faculty"
-            type="text"
-          >
-          <label
-            for="specialty"
-            class="label-input"
-          >Специальность:</label>
-          <input
-            id="specialty"
-            v-model="formData.specialty"
-            type="text"
-          >
-          <label
-            for="course"
-            class="label-input"
-          >Курс:</label>
-          <input
-            id="course"
-            v-model="formData.course"
-            type="text"
-          >
-          <label
-            for="group"
-            class="label-input"
-          >Группа:</label>
-          <input
-            id="group"
-            v-model="formData.group"
-            type="text"
-          >
-          <label
-            for="city"
-            class="label-input"
-          >Город:</label>
-          <input
-            id="city"
-            v-model="formData.city"
-            type="text"
-          >
-          <label
-            for="postindx"
-            class="label-input"
-          >Почтовый индекс:</label>
-          <input
-            id="postindx"
-            v-model="formData.postalCode"
-            type="text"
-          >
-          <label
-            for="street"
-            class="label-input"
-          >Улица:</label>
-          <input
-            id="street"
-            v-model="formData.street"
-            type="text"
-          >
-          <label
-            for="telephone"
-            class="label-input"
-          >Телефон:</label>
-          <input
-            id="telephone"
-            v-model="formData.phone"
-            type="text"
-          >
-          <label
-            for="post"
-            class="label-input"
-          >Почта:</label>
-          <input
-            id="post"
-            v-model="formData.email"
-            type="text"
-          >
-          <div class="modal-footer">
-            <button
-              class="btn-own-cls"
-              @click="closeWindow()"
-            >
-              Отмена
-            </button>
-            <button
-              class="btn-own-cls"
-              @click="submitStudent()"
-            >
-              OK
-            </button>
-          </div>
+            OK
+          </button>
         </div>
       </div>
     </div>
-  </Transition>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   props: {
-    sendData: {
+    currentStudent: {
       type: Object,
-      default: () => ({})
+      default: () => {}
     }
   },
   computed: {
-    ...mapGetters(["allStudents"]),
-    totalStudents() {
-      return this.allStudents.length;
-    },
-    modalTitle() {
-      return Object.keys(this.sendData).length !== 0 ? "Редактировать Студента" : "Добавить Студента";
-    },
     formData() {
-      if (!this.sendData) {
+      if (!this.currentStudent) {
         return {
           id: undefined,
           name: "",
@@ -172,12 +161,12 @@ export default {
         };
       }
       else {
-        return { ...this.sendData };
+        return { ...this.currentStudent };
       }
     }
   },
   methods: {
-    async submitStudent() {
+    async submit() {
       for (const key in this.formData) {
         if (this.formData[key] === "" && this.formData["id"] !== "") {
           alert(`Пожалуйста заполните ${key} поле!`);
@@ -185,27 +174,17 @@ export default {
         }
       }
 
-      if (!this.sendData) {
+      if (!this.currentStudent) {
         await this.$store.dispatch("addStudent", this.formData);
-        this.$store.dispatch("fetchStudents");
-        this.closeWindow();
       }
       else {
         await this.$store.dispatch("updateStudent", this.formData);
-        this.$store.dispatch("fetchStudents");
-        this.closeWindow();
       }
+      await this.$store.dispatch("refreshStudents");
+      this.close();
     },
-    closeWindow() {
+    close() {
       this.$emit("close");
-      this.resetForm();
-    },
-    resetForm() {
-      for (const key in this.formData) {
-        if (key !== "id") {
-          this.formData[key] = "";
-        }
-      }
     }
   }
 };

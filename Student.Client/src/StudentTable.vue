@@ -2,15 +2,15 @@
   <div>
     <ModalForm
       v-if="showModal"
-      :send-data="selectedStudent"
+      :current-student="selectedStudent"
       @close="closeModalWindow()"
     />
-    <Tablemain
-      :table-fields="tableFields"
-      :get-all-students="sendAllStudents"
+    <MainTable
+      :columns="tableFields"
+      :rows="sendAllStudents"
       @click="editStudent"
       @sort="sortData"
-      @refreshData="refreshData"
+      @refresh="refreshData"
       @sendData="sendMainData"
       @delete="deleteStudent"
     />
@@ -18,13 +18,12 @@
 </template>
 
 <script>
+import MainTable from "./Table.vue";
 import ModalForm from "./ModalForm.vue";
-import Tablemain from "./Table.vue";
-import Vue from "vue";
 
-export default Vue.extend({
+export default ({
   components: {
-    Tablemain,
+    MainTable,
     ModalForm
   },
   data() {
@@ -34,18 +33,18 @@ export default Vue.extend({
       nameFilter: "",
       tableFields: [
         { key: "id", label: "id" },
-        { key: "Surname", label: "Фамилия" },
-        { key: "Name", label: "Имя" },
-        { key: "Patron", label: "Отчество" },
-        { key: "Faculty", label: "Факультет" },
-        { key: "Specialty", label: "Специальность" },
-        { key: "Course", label: "Курс" },
-        { key: "Group", label: "Группа" },
-        { key: "City", label: "Город" },
-        { key: "PostalCode", label: "Почтовый индекс" },
-        { key: "Street", label: "Улица" },
-        { key: "Phone", label: "Телефон" },
-        { key: "Email", label: "Почта" }
+        { key: "surname", label: "Фамилия" },
+        { key: "name", label: "Имя" },
+        { key: "patron", label: "Отчество" },
+        { key: "faculty", label: "Факультет" },
+        { key: "specialty", label: "Специальность" },
+        { key: "course", label: "Курс" },
+        { key: "group", label: "Группа" },
+        { key: "city", label: "Город" },
+        { key: "postalCode", label: "Почтовый индекс" },
+        { key: "street", label: "Улица" },
+        { key: "phone", label: "Телефон" },
+        { key: "email", label: "Почта" }
       ]
     };
   },
@@ -59,10 +58,10 @@ export default Vue.extend({
   },
   methods: {
     async refreshData() {
-      await this.$store.dispatch("fetchStudents");
+      await this.$store.dispatch("refreshStudents");
     },
-    editStudent(dep) {
-      this.selectedStudent = dep;
+    editStudent(student) {
+      this.selectedStudent = student;
       this.showModal = true;
       this.refreshData();
     },
@@ -71,10 +70,11 @@ export default Vue.extend({
       this.showModal = !this.showModal;
     },
     sortData(tag, asc) {
+      tag = tag.charAt(0).toUpperCase() + tag.slice(1);
       this.$store.dispatch("sortStudents", { name: tag, asc: asc });
     },
-    sendMainData(dep) {
-      this.$root.$emit("getStudentData", dep);
+    sendMainData(student) {
+      this.$router.push({ name: "StudentInfo", params: { studentId: student.id } });
     },
     deleteStudent(id) {
       this.$store.dispatch("deleteStudent", id);

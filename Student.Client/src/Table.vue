@@ -21,21 +21,21 @@
       </thead>
       <tbody>
         <tr
-          v-for="dep in getAllStudents"
-          :key="dep.id"
+          v-for="data in rows"
+          :key="data.id"
         >
           <td
             v-for="field in filteredTableFields"
             :key="field.key"
           >
-            {{ getValueFromKey(dep, field.key) }}
+            {{ getValueFromKey(data, field.key) }}
           </td>
           <td>
             <div class="d-flex">
               <button
                 type="button"
                 class="btn-b-0-20"
-                @click="sendStudentData(dep)"
+                @click="sendStudentData(data)"
               >
                 Inf
               </button>
@@ -44,7 +44,7 @@
                 class="btn-b-0-20"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                @click="editStudent(dep)"
+                @click="editStudent(data)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@
               <button
                 type="button"
                 class="btn-b-0-20"
-                @click="deleteStudent(dep.id)"
+                @click="deleteStudent(data.id)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -82,29 +82,21 @@
         </tr>
       </tbody>
     </table>
-    <RouterView />
   </div>
 </template>
 
 <script>
-import store from "./store/store";
-
 export default ({
   props: {
-    tableFields: {
+    columns: {
       type: Array,
-      default: () => {
-        [];
-      }
+      default: () => []
     },
-    getAllStudents: {
+    rows: {
       type: Array,
-      default: () => {
-        [];
-      }
+      default: () => []
     }
   },
-  store,
   data() {
     return {
       cont: 0,
@@ -113,7 +105,7 @@ export default ({
   },
   computed: {
     filteredTableFields() {
-      return this.tableFields.filter(field => field.key !== "id");
+      return this.columns.filter(field => field.key !== "id");
     }
   },
   methods: {
@@ -146,13 +138,13 @@ export default ({
         this.$emit("sort", this.sortTitle, false);
       }
       else if (this.cont === 3) {
-        this.$emit("refreshData");
+        this.$emit("refresh");
         this.cont = 0;
         this.sortTitle = "";
       }
     },
-    sendStudentData(value) {
-      this.$emit("sendData", value);
+    sendStudentData(data) {
+      this.$emit("sendData", data);
     }
   }
 });

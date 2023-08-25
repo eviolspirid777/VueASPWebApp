@@ -31,14 +31,14 @@ export default new Vuex.Store({
       commit("addStudent", studentData);
       await DataClient.postStudent(studentData);
     },
-    async fetchStudents({ commit }) {
+    async refreshStudents({ commit }) {
       const students = await DataClient.getAllData();
       commit("setStudents", students);
       return students;
     },
     async deleteStudent({ dispatch }, ID) {
       await DataClient.deleteStudent(ID);
-      dispatch("fetchStudents");
+      dispatch("refreshStudents");
     },
     async updateStudent(state, studentData) {
       await DataClient.updateStudentData(studentData);

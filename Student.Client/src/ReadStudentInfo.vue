@@ -42,19 +42,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "StudentInfo",
   computed: {
-    allStudents() {
-      return this.$store.getters.allStudents;
-    },
+    ...mapGetters(["allStudents"]),
     studentData() {
       let id = this.$route.params.studentId;
       return this.allStudents.find(student => student.id == id);
     }
   },
   async created() {
-    await this.$store.dispatch("fetchStudents");
+    await this.$store.dispatch("refreshStudents");
   }
 };
 </script>

@@ -5,14 +5,13 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-const routes = [
-  { name: "Student", path: "/Student", component: Student },
-  { name: "StudentInfo", path: "/StudentInfo/:studentId", component: StudentInfo }
-];
-
 const routers = new VueRouter({
   mode: "history",
-  routes: routes
+  routes: [
+    { name: "Home", path: "/", redirect: "Student" },
+    { name: "Student", path: "/Student", component: Student },
+    { name: "StudentInfo", path: "/StudentInfo/:studentId", component: StudentInfo }
+  ]
 });
 
 export default routers;
