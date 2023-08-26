@@ -2,7 +2,7 @@
   <div class="modal-mask">
     <div class="modal-wrapper">
       <div class="modal-container">
-        <h1>
+        <h1 class="header">
           Данные о студенте
         </h1>
         <hr style="color:rgb(46, 73, 108)">
@@ -235,7 +235,7 @@ export default {
   opacity: 0;
 }
 
-h1 {
+.header {
   padding-bottom: 10px;
   font-size: 30px;
   margin-left: 22%;
@@ -243,22 +243,25 @@ h1 {
   text-shadow: 1px 1px 5px rgba(15, 83, 252, 1), 1px 1px 10px rgb(19, 38, 87);
 }
 
-label {
+.modal-container label {
   display: inline-block;
   width: 150px;
   text-align: right;
   margin-right: 10px;
   font-weight: bold;
   font-size: 16px;
+  color: #ffffffd3;
 }
 
-input {
+.modal-container input {
   width: 200px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 16px;
+  background-color: rgba(19, 38, 87, 0.308);
+  color: #fff;
 }
 
 .btn-own-cls {
@@ -278,8 +281,5 @@ input {
 
 .label-input {
   margin-bottom: 20px;
-}
-label{
-  color: #ffffffd3;
 }
 </style>

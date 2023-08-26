@@ -1,3 +1,4 @@
+import Cities from "./Cities.vue";
 import Student from "./Student.vue";
 import StudentInfo from "./ReadStudentInfo.vue";
 import Vue from "vue";
@@ -10,6 +11,7 @@ const routers = new VueRouter({
   routes: [
     { name: "Home", path: "/", redirect: "Student" },
     { name: "Student", path: "/Student", component: Student },
+    { name: "Cities", path: "/Cities", component: Cities },
     { name: "StudentInfo", path: "/StudentInfo/:studentId", component: StudentInfo }
   ]
 });

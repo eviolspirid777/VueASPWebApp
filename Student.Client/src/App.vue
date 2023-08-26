@@ -17,6 +17,13 @@
     >
       Студенты
     </RouterLink>
+    <RouterLink
+      to="/Cities"
+      class="routLink"
+      hidden
+    >
+      Города
+    </RouterLink>
     <RouterView
       class="router-view"
     />
@@ -45,6 +52,7 @@ export default {
     height: 40px;
     background-color: white;
     text-decoration: none;
+    margin-right: 10px;
   }
   .routLink:hover{
     background-color: rgba(15, 83, 252, 1);

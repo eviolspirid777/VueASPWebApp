@@ -11,7 +11,7 @@
       @click="editStudent"
       @sort="sortData"
       @refresh="refreshData"
-      @sendData="sendMainData"
+      @sendData="openInformation"
       @delete="deleteStudent"
     />
   </div>
@@ -73,7 +73,7 @@ export default ({
       tag = tag.charAt(0).toUpperCase() + tag.slice(1);
       this.$store.dispatch("sortStudents", { name: tag, asc: asc });
     },
-    sendMainData(student) {
+    openInformation(student) {
       this.$router.push({ name: "StudentInfo", params: { studentId: student.id } });
     },
     deleteStudent(id) {

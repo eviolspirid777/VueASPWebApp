@@ -83,9 +83,9 @@ export default ({
   box-shadow: 2px 3px 8px #007bff;
 }
 
-input{
+.form-control-m-2{
   margin-left: 10px;
-  width: auto;
+  width: 100px;
   border-radius: 4px;
   border: 2px solid rgba(15, 83, 252);
   height: 40px;
