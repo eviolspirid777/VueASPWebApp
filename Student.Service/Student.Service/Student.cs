@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Student.Service;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -26,7 +27,7 @@ namespace EF_web_app
 		[DataMember(Name = "group")]
 		public string Group { get; set; }
 		[DataMember(Name = "city")]
-		public string City { get; set; }
+		public Cities City { get; set; }
 		[DataMember(Name = "postalcode")]
 		public string PostalCode { get; set; }
 		[DataMember(Name = "street")]

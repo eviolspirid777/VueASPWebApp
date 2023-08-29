@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     students: [],
+    cities: [],
     studName: "",
     sortName: "",
     sortAsc: true
@@ -15,8 +16,14 @@ export default new Vuex.Store({
     addStudent(state, studentData) {
       state.students.push(studentData);
     },
+    addCity(state, City) {
+      state.cities.push(City);
+    },
     setStudents(state, students) {
       state.students = students;
+    },
+    setCities(state, cities) {
+      state.cities = cities;
     },
     setSort(state, { name, asc }) {
       state.sortName = name;
@@ -31,17 +38,34 @@ export default new Vuex.Store({
       commit("addStudent", studentData);
       await DataClient.postStudent(studentData);
     },
+    async addCity(state, city) {
+      state.commit("addCity", city);
+      await DataClient.postCity(city);
+    },
     async refreshStudents({ commit }) {
       const students = await DataClient.getAllData();
       commit("setStudents", students);
       return students;
     },
+    async refreshCities({ commit }) {
+      const cities = await DataClient.getAllCities();
+      commit("setCities", cities);
+      return cities;
+    },
     async deleteStudent({ dispatch }, ID) {
       await DataClient.deleteStudent(ID);
       dispatch("refreshStudents");
     },
+    async deleteCity(state, ID) {
+      await DataClient.deleteCity(ID);
+      state.dispatch("refreshCities");
+    },
     async updateStudent(state, studentData) {
       await DataClient.updateStudentData(studentData);
+      return;
+    },
+    async updateCity(state, city) {
+      await DataClient.updateCityData(city);
       return;
     },
     async sortStudents({ commit, state }, { name, asc }) {
@@ -61,6 +85,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    allCities: state => state.cities,
     allStudents: state => state.students,
     sortProperty: state => state.sortProperty,
     sortAsc: state => state.sortAsc

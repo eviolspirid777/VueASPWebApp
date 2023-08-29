@@ -20,7 +20,6 @@
     <RouterLink
       to="/Cities"
       class="routLink"
-      hidden
     >
       Города
     </RouterLink>

@@ -73,11 +73,19 @@
           for="city"
           class="label-input"
         >Город:</label>
-        <input
+        <!-- <input
           id="city"
           v-model="formData.city"
           type="text"
-        >
+        > -->
+        <select v-model="selectedItem">
+          <option
+            v-for="item in cities"
+            :key="item.id"
+          >
+            {{ item }}
+          </option>
+        </select>
         <label
           for="postindx"
           class="label-input"
@@ -134,6 +142,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     currentStudent: {
@@ -141,7 +151,18 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      selectedItem: ""
+    };
+  },
   computed: {
+    ...mapGetters({
+      getAllCities: "allCities"
+    }),
+    cities() {
+      return this.$store.getters.allCities.map(city => city.country);
+    },
     formData() {
       if (!this.currentStudent) {
         return {
@@ -165,10 +186,13 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$store.dispatch("refreshCities");
+  },
   methods: {
     async submit() {
       for (const key in this.formData) {
-        if (this.formData[key] === "" && this.formData["id"] !== "") {
+        if (this.formData[key] === "") {
           alert(`Пожалуйста заполните ${key} поле!`);
           return;
         }
@@ -253,7 +277,7 @@ export default {
   color: #ffffffd3;
 }
 
-.modal-container input {
+.modal-container input, select {
   width: 200px;
   padding: 5px;
   border: 1px solid #ccc;

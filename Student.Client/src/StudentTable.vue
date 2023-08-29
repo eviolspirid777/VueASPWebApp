@@ -7,7 +7,7 @@
     />
     <MainTable
       :columns="tableFields"
-      :rows="sendAllStudents"
+      :rows="formattedStudents"
       @click="editStudent"
       @sort="sortData"
       @refresh="refreshData"
@@ -49,8 +49,11 @@ export default ({
     };
   },
   computed: {
-    sendAllStudents() {
-      return this.$store.getters.allStudents;
+    formattedStudents() {
+      return this.$store.getters.allStudents.map(student => ({
+        ...student,
+        city: student.city.country
+      }));
     }
   },
   async mounted() {
