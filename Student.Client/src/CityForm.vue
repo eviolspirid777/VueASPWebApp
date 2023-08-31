@@ -39,7 +39,8 @@ export default ({
   props: {
     currentData: {
       type: Object,
-      default: () => {}
+      default: () => {},
+      required: false
     }
   },
   computed: {
@@ -64,7 +65,8 @@ export default ({
         }
       }
 
-      if (!this.currentData) {
+      if (Object.keys(this.currentData).length === 0) { //какой-то баг непонятный с проверкой...
+        console.log("addMethod");
         await this.$store.dispatch("addCity", this.formData);
       }
       else {

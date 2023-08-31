@@ -26,7 +26,7 @@
       <label>Группа: {{ studentData.group }}</label>
     </p>
     <p>
-      <label>Город: {{ studentData.city }}</label>
+      <label>Город: {{ studentData.city.country }}</label>
     </p>
     <p>
       <label>Почтовый индекс: {{ studentData.postalCode }}</label>

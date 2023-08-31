@@ -90,7 +90,7 @@ namespace EF_web_app.Controllers
 			await _context.SaveChangesAsync();
 			return Ok();                                                                            //возвращаем код 200(Ok)
 		}
-		[HttpPut("Cities")]                                           //Изменение данных о городе
+		[HttpPut("cities")]                                           //Изменение данных о городе
 		public async Task<IActionResult> PutCity(Cities City)
 		{
 			_context.Cities.Entry(City).State = EntityState.Modified;

@@ -73,12 +73,10 @@
           for="city"
           class="label-input"
         >Город:</label>
-        <!-- <input
+        <select
           id="city"
-          v-model="formData.city"
-          type="text"
-        > -->
-        <select v-model="selectedItem">
+          v-model="formData.city.country"
+        >
           <option
             v-for="item in cities"
             :key="item.id"
@@ -161,7 +159,7 @@ export default {
       getAllCities: "allCities"
     }),
     cities() {
-      return this.$store.getters.allCities.map(city => city.country);
+      return this.getAllCities.map(city => city.country);
     },
     formData() {
       if (!this.currentStudent) {
@@ -174,7 +172,7 @@ export default {
           specialty: "",
           course: "",
           group: "",
-          city: "",
+          city: { id: undefined, country: "" },
           postalCode: "",
           street: "",
           phone: "",
@@ -182,7 +180,13 @@ export default {
         };
       }
       else {
-        return { ...this.currentStudent };
+        return {
+          ...this.currentStudent,
+          city: {
+            id: this.$store.getters.allStudents.find(student => student.id == this.currentStudent.id).city.id,
+            country: this.currentStudent.city
+          }
+        };
       }
     }
   },
@@ -197,6 +201,8 @@ export default {
           return;
         }
       }
+
+      this.formData.city.id = this.$store.getters.allCities.find(city => city.country == this.formData.city.country).id;
 
       if (!this.currentStudent) {
         await this.$store.dispatch("addStudent", this.formData);

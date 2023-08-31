@@ -56,7 +56,7 @@ export default ({
       this.refreshData();
     },
     closeModalWindow() {
-      this.selectedStudent = {};
+      this.selectedCity = {};
       this.showModal = !this.showModal;
     },
     deleteCity(id) {

@@ -64,6 +64,7 @@ export default ({
       await this.$store.dispatch("refreshStudents");
     },
     editStudent(student) {
+      console.log(student);
       this.selectedStudent = student;
       this.showModal = true;
       this.refreshData();
