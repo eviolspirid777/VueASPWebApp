@@ -202,12 +202,11 @@ export default {
         }
       }
 
-      this.formData.city.id = this.$store.getters.allCities.find(city => city.country == this.formData.city.country).id;
-
       if (!this.currentStudent) {
         await this.$store.dispatch("addStudent", this.formData);
       }
       else {
+        this.formData.city.id = this.$store.getters.allCities.find(city => city.country == this.formData.city.country).id;
         await this.$store.dispatch("updateStudent", this.formData);
       }
       await this.$store.dispatch("refreshStudents");

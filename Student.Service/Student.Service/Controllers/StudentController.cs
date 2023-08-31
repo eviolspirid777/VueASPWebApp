@@ -68,12 +68,13 @@ namespace EF_web_app.Controllers
 			return Ok(cities);
 		}
 
-		[HttpPost]                                                  //Добавление студента
+		[HttpPost]                                                  // Добавление студента
 		public async Task<IActionResult> Post(Student student)
 		{
+			student.City = await _context.Cities.FirstOrDefaultAsync(c => c.Country == student.City.Country);
 			_context.Students.Add(student);
 			await _context.SaveChangesAsync();
-			return Ok();                                                                //возвращаем код 200(Ok)
+			return Ok();                                                                // возвращаем код 200(Ok)
 		}
 		[HttpPost("cities")]                                                  //Добавление города
 		public async Task<IActionResult> PostCity(Cities City)
@@ -86,6 +87,7 @@ namespace EF_web_app.Controllers
 		[HttpPut]                                           //Изменение данных о студенте
 		public async Task<IActionResult> Put(Student student)
 		{
+			_context.Entry(student.City).State = EntityState.Modified;
 			_context.Entry(student).State = EntityState.Modified;
 			await _context.SaveChangesAsync();
 			return Ok();                                                                            //возвращаем код 200(Ok)

@@ -34,13 +34,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async addStudent({ commit }, studentData) {
-      commit("addStudent", studentData);
+    async addStudent({ dispatch }, studentData) {
       await DataClient.postStudent(studentData);
+      await dispatch("refreshStudents");
     },
-    async addCity(state, city) {
-      state.commit("addCity", city);
+    async addCity({ dispatch }, city) {
       await DataClient.postCity(city);
+      await dispatch("refreshStudents");
     },
     async refreshStudents({ commit }) {
       const students = await DataClient.getAllData();
